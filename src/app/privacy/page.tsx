@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
     {
       title: "How We Use Your Information",
       content: [
-        "To notify you about Rasmlai's availability and updates",
+        "To notify you about Rasmlai&apos;s availability and updates",
         "To provide and improve our emotional support services",
         "To ensure the safety and security of our platform",
         "To comply with legal obligations and protect user rights",
@@ -100,8 +100,8 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Your privacy is fundamental to us. Here's how we protect and respect
-            your personal information.
+            Your privacy is fundamental to us. Here&apos;s how we protect and
+            respect your personal information.
           </p>
           <p className="text-sm text-gray-500 mt-4">
             Last updated: July 15, 2025
@@ -152,7 +152,8 @@ export default function PrivacyPolicy() {
             Questions About Your Privacy?
           </h2>
           <p className="text-xl opacity-90 mb-6">
-            We're here to help you understand how we protect your information.
+            We&apos;re here to help you understand how we protect your
+            information.
           </p>
           <motion.a
             href="mailto:privacy@rasmlai.com"
