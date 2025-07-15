@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Magnet from "@/components/ui/magneticButton";
 
-// Fix: Properly define the interface and destructure props
+
 interface CalltoActionProps {
   openWaitlist: () => void;
 }
@@ -98,3 +98,4 @@ const CalltoAction: React.FC<CalltoActionProps> = ({ openWaitlist }) => {
 };
 
 export default CalltoAction;
+
