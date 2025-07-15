@@ -1,81 +1,22 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-} from "framer-motion";
-import Footer from "./components/footer";
-import CalltoAction from "./components/call-to-action";
-import HeroSection from "./components/herosection";
-import Testimonials from "./components/testimonials";
-import EmotionalColor from "./components/emotional-color";
-import HowitWorks from "./components/how-it-works";
-import Emotional from "./components/emotional";
+"use client"
+import React, { useRef } from 'react'
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 
-const RasmlaiLanding = () => {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
+const HeroSection = () => {
+      const containerRef = useRef(null);
+      const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
-  const smoothProgress = useSpring(scrollYProgress, {
+
+     const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
-  const phoneY = useTransform(smoothProgress, [0, 0.5], ["0%", "-20%"]);
-  const phoneRotate = useTransform(smoothProgress, [0, 0.3], [0, 15]);
-
-  // // Parallax transforms
-  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "50%"]);
-  const blobY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-
+    const phoneY = useTransform(smoothProgress, [0, 0.5], ["0%", "-20%"]);
+    const phoneRotate = useTransform(smoothProgress, [0, 0.3], [0, 15]);
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden"
-    >
-      {/* Animated Background Elements */}
-      <motion.div
-        style={{ y: backgroundY }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <div className="absolute top-20 left-10 w-32 h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>
-        <div className="absolute top-40 right-20 w-48 h-48 bg-pink-200 rounded-full opacity-15 blur-2xl"></div>
-        <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-purple-200 rounded-full opacity-25 blur-lg"></div>
-      </motion.div>
-
-      {/* Floating Organic Shapes */}
-      <motion.div
-        style={{ y: blobY }}
-        className="absolute inset-0 pointer-events-none"
-      >
-        <svg
-          className="absolute top-1/4 left-1/3 w-64 h-64 opacity-10"
-          viewBox="0 0 200 200"
-        >
-          <motion.path
-            d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,89.9,-16.3,89.3,-0.5C88.6,15.3,84.8,30.6,76.8,43.2C68.8,55.8,56.6,65.7,42.4,72.8C28.2,79.9,12,84.2,-4.8,91.8C-21.6,99.4,-43.2,110.3,-59.4,107.2C-75.6,104.1,-86.4,87,-91.8,68.4C-97.2,49.8,-97.2,29.8,-94.4,11.2C-91.6,-7.4,-86,-24.6,-76.2,-38.8C-66.4,-53,-52.4,-64.2,-37.2,-70.8C-22,-77.4,-6.6,-79.4,7.2,-78.4C21,-77.4,42,-73.4,44.7,-76.4Z"
-            fill="currentColor"
-            className="text-red-300"
-            animate={{
-              d: [
-                "M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,89.9,-16.3,89.3,-0.5C88.6,15.3,84.8,30.6,76.8,43.2C68.8,55.8,56.6,65.7,42.4,72.8C28.2,79.9,12,84.2,-4.8,91.8C-21.6,99.4,-43.2,110.3,-59.4,107.2C-75.6,104.1,-86.4,87,-91.8,68.4C-97.2,49.8,-97.2,29.8,-94.4,11.2C-91.6,-7.4,-86,-24.6,-76.2,-38.8C-66.4,-53,-52.4,-64.2,-37.2,-70.8C-22,-77.4,-6.6,-79.4,7.2,-78.4C21,-77.4,42,-73.4,44.7,-76.4Z",
-                "M35.2,-62.8C45.4,-54.2,53.2,-43.4,58.8,-31.2C64.4,-19,67.8,-5.4,67.2,8.4C66.6,22.2,62,36.2,53.4,46.8C44.8,57.4,32.2,64.6,18.4,68.4C4.6,72.2,-10.4,72.6,-24.8,69.2C-39.2,65.8,-53,58.6,-62.4,47.8C-71.8,37,-76.8,22.6,-77.6,7.8C-78.4,-7,-75,-22.2,-67.2,-34.8C-59.4,-47.4,-47.2,-57.4,-33.6,-64.8C-20,-72.2,-5,-77,-1.4,-74.8C2.2,-72.6,17.6,-71.4,35.2,-62.8Z",
-              ],
-            }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "reverse",
-              duration: 8,
-              ease: "easeInOut",
-            }}
-          />
-        </svg>
-      </motion.div>
       <section className="relative min-h-screen flex items-center justify-center px-4">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           {/* Hero Content */}
@@ -423,22 +364,8 @@ const RasmlaiLanding = () => {
           </motion.div>
         </div>
       </section>
-      {/* Emotional Story Section */}
-      <Emotional />
 
-      {/* How It Works Section */}
-      <HowitWorks />
+  )
+}
 
-      {/* Emotional Colors Section */}
-      <EmotionalColor />
-      {/* Testimonials Section */}
-      <Testimonials />
-
-      {/* Final CTA Section */}
-      <CalltoAction />
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
-};
-export default RasmlaiLanding;
+export default HeroSection
