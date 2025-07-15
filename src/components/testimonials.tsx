@@ -52,7 +52,7 @@ const Testimonials = () => {
                 }}
                 className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <div className="text-5xl text-purple-300 mb-4">"</div>
+                <div className="text-5xl text-purple-300 mb-4">&ldquo;</div>
                 <p className="text-gray-700 mb-6 italic leading-relaxed">
                   {item.quote}
                 </p>

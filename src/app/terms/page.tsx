@@ -63,7 +63,7 @@ export default function TermsOfService() {
     {
       title: "Limitation of Liability",
       content: [
-        "Rasmlai is provided 'as is' without warranties of any kind",
+        "Rasmlai is provided &apos;as is&apos; without warranties of any kind",
         "We are not liable for any indirect, incidental, or consequential damages",
         "Our total liability is limited to the amount you paid for the service",
         "Some jurisdictions do not allow liability limitations, so these may not apply to you",
@@ -177,7 +177,7 @@ export default function TermsOfService() {
               </h3>
               <p className="text-gray-700 leading-relaxed">
                 Rasmlai is designed to support emotional wellness but is not a
-                substitute for professional mental health care. If you're
+                substitute for professional mental health care. If you&apos;re
                 experiencing thoughts of self-harm or suicide, please contact
                 emergency services or a mental health professional immediately.
               </p>
@@ -196,8 +196,8 @@ export default function TermsOfService() {
             Questions About These Terms?
           </h2>
           <p className="text-xl opacity-90 mb-6">
-            We're here to clarify any questions you might have about our terms
-            of service.
+            We&apos;re here to clarify any questions you might have about our
+            terms of service.
           </p>
           <motion.a
             href="mailto:legal@rasmlai.com"

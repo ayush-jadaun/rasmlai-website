@@ -10,7 +10,7 @@ export default function Support() {
     {
       question: "What is Rasmlai and how does it work?",
       answer:
-        "Rasmlai is an AI-powered emotional support platform that provides a safe space for you to express your feelings. Our AI companion listens to your emotions and offers supportive responses to help you process what you're feeling.",
+        "Rasmlai is an AI-powered emotional support platform that provides a safe space for you to express your feelings. Our AI companion listens to your emotions and offers supportive responses to help you process what you&apos;re feeling.",
     },
     {
       question: "Is my emotional data secure and private?",
@@ -25,22 +25,22 @@ export default function Support() {
     {
       question: "How do I join the waitlist?",
       answer:
-        "Simply click the 'Join Waitlist' button on our homepage and provide your name and email address. We'll notify you as soon as Rasmlai becomes available.",
+        "Simply click the &apos;Join Waitlist&apos; button on our homepage and provide your name and email address. We&apos;ll notify you as soon as Rasmlai becomes available.",
     },
     {
       question: "Will there be a cost to use Rasmlai?",
       answer:
-        "We're still finalizing our pricing model. Our goal is to make emotional support accessible to everyone. Waitlist members will be the first to know about pricing and may receive special early-access offers.",
+        "We&apos;re still finalizing our pricing model. Our goal is to make emotional support accessible to everyone. Waitlist members will be the first to know about pricing and may receive special early-access offers.",
     },
     {
-      question: "What if I'm having thoughts of self-harm?",
+      question: "What if I&apos;m having thoughts of self-harm?",
       answer:
-        "If you're experiencing thoughts of self-harm or suicide, please reach out to emergency services or a crisis helpline immediately. Rasmlai is not equipped to handle crisis situations, and professional help is essential.",
+        "If you&apos;re experiencing thoughts of self-harm or suicide, please reach out to emergency services or a crisis helpline immediately. Rasmlai is not equipped to handle crisis situations, and professional help is essential.",
     },
     {
       question: "How does the AI understand emotions?",
       answer:
-        "Our AI is trained on emotional patterns and responses to provide empathetic support. While it can recognize emotional cues and provide helpful responses, it's important to remember that it's a tool, not a human therapist.",
+        "Our AI is trained on emotional patterns and responses to provide empathetic support. While it can recognize emotional cues and provide helpful responses, it&apos;s important to remember that it&apos;s a tool, not a human therapist.",
     },
     {
       question: "Can I use Rasmlai on mobile devices?",
@@ -142,7 +142,7 @@ export default function Support() {
             Support Center
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            We're here to help you on your emotional wellness journey. Find
+            We&apos;re here to help you on your emotional wellness journey. Find
             answers to common questions or reach out directly.
           </p>
         </motion.div>
@@ -159,8 +159,8 @@ export default function Support() {
               🚨 Crisis Resources
             </h2>
             <p className="text-red-700 text-lg">
-              If you're in crisis or having thoughts of self-harm, please reach
-              out for immediate help:
+              If you&apos;re in crisis or having thoughts of self-harm, please
+              reach out for immediate help:
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -290,8 +290,8 @@ export default function Support() {
         >
           <h2 className="text-3xl font-bold mb-4">Still Need Help?</h2>
           <p className="text-xl opacity-90 mb-6">
-            Can't find what you're looking for? Our support team is here to
-            help.
+            Can&apos;t find what you&apos;re looking for? Our support team is
+            here to help.
           </p>
           <motion.a
             href="mailto:support@rasmlai.com"

@@ -17,8 +17,8 @@ const Footer = () => {
               Rasmlai
             </div>
             <p className="text-gray-300 text-lg leading-relaxed max-w-sm">
-              Your safe space for emotional expression and healing. We're here
-              to support your mental wellness journey.
+              Your safe space for emotional expression and healing. We&apos;re
+              here to support your mental wellness journey.
             </p>
           </div>
 

@@ -57,7 +57,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
           setErrorMessage(data.error || "Something went wrong");
         }
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus("error");
       setErrorMessage("Network error. Please try again.");
     } finally {
@@ -216,8 +216,9 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                     🎉 Welcome aboard!
                   </h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
-                    You're now on the waitlist! We'll notify you the moment
-                    Rasmlai is ready to help you on your emotional journey.
+                    You&apos;re now on the waitlist! We&apos;ll notify you the
+                    moment Rasmlai is ready to help you on your emotional
+                    journey.
                   </p>
                 </motion.div>
               )}
@@ -245,11 +246,11 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                     <span className="text-amber-600 text-3xl">👋</span>
                   </motion.div>
                   <h3 className="text-3xl font-bold text-amber-600 mb-4">
-                    You're already in!
+                    You&apos;re already in!
                   </h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
-                    This email is already on our waitlist. We'll be in touch
-                    soon with updates!
+                    This email is already on our waitlist. We&apos;ll be in
+                    touch soon with updates!
                   </p>
                 </motion.div>
               )}
@@ -418,8 +419,8 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                         <span className="font-semibold text-gray-700">
                           Privacy guaranteed.
                         </span>{" "}
-                        We'll only use your information to notify you about
-                        Rasmlai's launch. No spam, no sharing with third
+                        We&apos;ll only use your information to notify you about
+                        Rasmlai&apos;s launch. No spam, no sharing with third
                         parties.
                       </p>
                     </div>

@@ -18,11 +18,11 @@ import HowitWorks from "./../components/how-it-works";
 import Emotional from "./../components/emotional";
 import ModelViewer from "./../components/ui/modelviewer";
 import WaitlistForm from "@/components/WaitlistForm";
+import Magnet from "@/components/ui/magneticButton";
 
 
 const RasmlaiLanding = () => {
   const containerRef = useRef(null);
-  // Fix: Change to boolean instead of null
   const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
 
   const { scrollYProgress } = useScroll({
@@ -37,7 +37,7 @@ const RasmlaiLanding = () => {
   const phoneY = useTransform(smoothProgress, [0, 0.5], ["0%", "-20%"]);
   const phoneRotate = useTransform(smoothProgress, [0, 0.3], [0, 15]);
 
-  // // Parallax transforms
+  // Parallax transforms
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "50%"]);
   const blobY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
@@ -123,37 +123,43 @@ const RasmlaiLanding = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
             >
-              <motion.button
-                className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 20px 40px rgba(229, 62, 62, 0.3)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                animate={{
-                  boxShadow: [
-                    "0 0 20px rgba(229, 62, 62, 0.3)",
-                    "0 0 40px rgba(229, 62, 62, 0.5)",
-                    "0 0 20px rgba(229, 62, 62, 0.3)",
-                  ],
-                }}
-                transition={{
-                  boxShadow: {
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }}
-                // Fix: Set to true instead of open
+              {/* Fixed: Wrap the button with Magnet component */}
+              <Magnet
                 onClick={() => setIsWaitlistOpen(true)}
+                padding={120}
+                magnetStrength={3}
+                wrapperClassName="inline-block"
               >
-                <motion.span
-                  className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0"
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <span className="relative z-10">Start Your Journey</span>
-              </motion.button>
+                <motion.button
+                  className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 20px 40px rgba(229, 62, 62, 0.3)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  animate={{
+                    boxShadow: [
+                      "0 0 20px rgba(229, 62, 62, 0.3)",
+                      "0 0 40px rgba(229, 62, 62, 0.5)",
+                      "0 0 20px rgba(229, 62, 62, 0.3)",
+                    ],
+                  }}
+                  transition={{
+                    boxShadow: {
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
+                  }}
+                >
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <span className="relative z-10">Start Your Journey</span>
+                </motion.button>
+              </Magnet>
             </motion.div>
           </motion.div>
 
@@ -198,7 +204,7 @@ const RasmlaiLanding = () => {
       {/* Footer */}
       <Footer />
 
-      {/* Fix: Add the WaitlistForm component with correct props */}
+      {/* WaitlistForm component */}
       <WaitlistForm
         isOpen={isWaitlistOpen}
         onClose={() => setIsWaitlistOpen(false)}
