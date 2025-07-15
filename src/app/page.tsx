@@ -7,18 +7,23 @@ import {
   useSpring,
   useInView,
 } from "framer-motion";
-import Footer from "./../components/footer";
-import CalltoAction from "./../components/call-to-action";
-import HeroSection from "./../components/herosection";
-import Spline from '@splinetool/react-spline';
-import Testimonials from "./../components/testimonials";
-import EmotionalColor from "./../components/emotional-color";
-import HowitWorks from "./../components/how-it-works";
-import Emotional from "./../components/emotional";
-import ModelViewer from "./../components/ui/modelviewer";
+
+import Footer from "../components/footer";
+import CalltoAction from "../components/call-to-action";
+import HeroSection from "../components/herosection";
+import Testimonials from "../components/testimonials";
+import EmotionalColor from "../components/emotional-color";
+import HowitWorks from "../components/how-it-works";
+import Emotional from "../components/emotional";
+import WaitlistForm from "./../components/WaitlistForm";
+import ModelViewer from "./../components/ui/ModelViewer";
+
 
 const RasmlaiLanding = () => {
   const containerRef = useRef(null);
+  // Fix: Change to boolean instead of null
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -78,6 +83,7 @@ const RasmlaiLanding = () => {
           />
         </svg>
       </motion.div>
+
       <section className="relative min-h-screen flex items-center justify-center px-4">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center justify-between">
           {/* Hero Content */}
@@ -137,6 +143,8 @@ const RasmlaiLanding = () => {
                     ease: "easeInOut",
                   },
                 }}
+                // Fix: Set to true instead of open
+                onClick={() => setIsWaitlistOpen(true)}
               >
                 <motion.span
                   className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0"
@@ -170,6 +178,7 @@ const RasmlaiLanding = () => {
 <div className="absolute top-40 right-20"></div>
         </div>
       </section>
+
       {/* Emotional Story Section */}
       <Emotional />
 
@@ -178,14 +187,23 @@ const RasmlaiLanding = () => {
 
       {/* Emotional Colors Section */}
       <EmotionalColor />
+
       {/* Testimonials Section */}
       <Testimonials />
 
       {/* Final CTA Section */}
-      <CalltoAction />
+      <CalltoAction openWaitlist={() => setIsWaitlistOpen(true)} />
+
       {/* Footer */}
       <Footer />
+
+      {/* Fix: Add the WaitlistForm component with correct props */}
+      <WaitlistForm
+        isOpen={isWaitlistOpen}
+        onClose={() => setIsWaitlistOpen(false)}
+      />
     </div>
   );
 };
+
 export default RasmlaiLanding;
