@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Magnet from "@/components/ui/magneticButton";
 
 // Fix: Properly define the interface and destructure props
 interface CalltoActionProps {
@@ -55,29 +56,41 @@ const CalltoAction: React.FC<CalltoActionProps> = ({ openWaitlist }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <motion.button
-            // Fix: Add onClick handler to open waitlist
+          {/* Add Magnet component wrapping the button */}
+          <Magnet
             onClick={openWaitlist}
-            className="bg-white text-red-600 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 20px 40px rgba(255,255,255,0.3)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            animate={{
-              y: [0, -5, 0],
-            }}
-            transition={{
-              y: {
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
+            padding={150}
+            magnetStrength={2.5}
+            wrapperClassName="inline-block"
+            activeTransition="transform 0.2s ease-out"
+            inactiveTransition="transform 0.4s ease-in-out"
           >
-            {/* Fix: Update button text to match waitlist functionality */}
-            Join Waitlist Now
-          </motion.button>
+            <motion.button
+              className="bg-white text-red-600 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(255,255,255,0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              animate={{
+                y: [0, -5, 0],
+              }}
+              transition={{
+                y: {
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-r from-red-50 to-pink-50 opacity-0"
+                whileHover={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="relative z-10">Join Waitlist Now</span>
+            </motion.button>
+          </Magnet>
         </motion.div>
       </div>
     </section>
