@@ -116,8 +116,8 @@ export default function NotFound() {
             Oops! Page Not Found
           </h2>
           <p className="text-xl lg:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            It seems like this page got lost in the emotional journey. Let's get
-            you back to a safe space.
+            It seems like this page got lost in the emotional journey.
+            Let&apos;s get you back to a safe space.
           </p>
         </motion.div>
 
@@ -231,8 +231,8 @@ export default function NotFound() {
             }}
             className="text-sm text-gray-400 italic"
           >
-            "Even our AI companion couldn't find this page... and that's saying
-            something! 🤖"
+            &ldquo;Even our AI companion couldn&apos;t find this page... and
+            that&apos;s saying something! 🤖&rdquo;
           </motion.p>
         </motion.div>
 

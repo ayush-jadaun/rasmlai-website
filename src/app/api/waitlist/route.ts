@@ -2,6 +2,16 @@ import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 
+interface ValidationError {
+  message: string;
+}
+
+interface MongoError extends Error {
+  code?: number;
+  name: string;
+  errors?: Record<string, ValidationError>;
+}
+
 // POST - Add to waitlist
 export async function POST(request: NextRequest) {
   try {
@@ -46,19 +56,21 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Waitlist API Error:", error);
 
-    if (error.code === 11000) {
+    const mongoError = error as MongoError;
+
+    if (mongoError.code === 11000) {
       return NextResponse.json(
         { error: "Email already exists" },
         { status: 409 }
       );
     }
 
-    if (error.name === "ValidationError") {
-      const validationErrors = Object.values(error.errors).map(
-        (err: any) => err.message
+    if (mongoError.name === "ValidationError") {
+      const validationErrors = Object.values(mongoError.errors || {}).map(
+        (err: ValidationError) => err.message
       );
       return NextResponse.json(
         { error: validationErrors.join(", ") },
