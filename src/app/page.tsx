@@ -1,15 +1,8 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  useInView,
-} from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
-import HeroSection from "../components/herosection";
 import Testimonials from "../components/testimonials";
 import EmotionalColor from "../components/emotional-color";
 import HowitWorks from "../components/how-it-works";
@@ -30,8 +23,6 @@ const RasmlaiLanding = () => {
     damping: 30,
     restDelta: 0.001,
   });
-  const phoneY = useTransform(smoothProgress, [0, 0.5], ["0%", "-20%"]);
-  const phoneRotate = useTransform(smoothProgress, [0, 0.3], [0, 15]);
 
   // Parallax transforms
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "50%"]);
@@ -160,10 +151,7 @@ const RasmlaiLanding = () => {
           </motion.div>
 
           {/* Floating Phone Mockup with Dynamic Entry */}
-          <motion.div
-            style={{ y: phoneY, rotateY: phoneRotate }}
-            className="relative flex justify-center"
-          >
+          <motion.div className="relative flex justify-center">
             <motion.div
               className="relative w-80 h-96 bg-white rounded-3xl shadow-2xl overflow-hidden"
               initial={{

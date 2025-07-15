@@ -1,6 +1,13 @@
-import { useState, useEffect, useRef, ReactNode, MouseEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  ReactNode,
+  MouseEvent,
+  HTMLAttributes,
+} from "react";
 
-interface MagnetProps {
+interface MagnetProps extends Omit<HTMLAttributes<HTMLDivElement>, "onClick"> {
   children: ReactNode;
   padding?: number;
   disabled?: boolean;
@@ -10,7 +17,6 @@ interface MagnetProps {
   wrapperClassName?: string;
   innerClassName?: string;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  [key: string]: any; // For additional props
 }
 
 const Magnet = ({
