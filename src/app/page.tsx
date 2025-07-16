@@ -10,13 +10,13 @@ import {
 
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
-import HeroSection from "../components/herosection";
 import Testimonials from "../components/testimonials";
 import EmotionalColor from "../components/emotional-color";
 import HowitWorks from "../components/how-it-works";
 import Emotional from "../components/emotional";
 import WaitlistForm from "./../components/WaitlistForm";
 import ModelViewer from "./../components/ui/ModelViewer";
+import Magnet from "@/components/ui/magneticButton";
 
 
 const RasmlaiLanding = () => {
