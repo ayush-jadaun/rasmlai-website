@@ -1,11 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   motion,
   useScroll,
   useTransform,
   useSpring,
-  useInView,
 } from "framer-motion";
 
 import Footer from "../components/footer";
@@ -15,9 +14,14 @@ import EmotionalColor from "../components/emotional-color";
 import HowitWorks from "../components/how-it-works";
 import Emotional from "../components/emotional";
 import WaitlistForm from "./../components/WaitlistForm";
-import ModelViewer from "./../components/ui/ModelViewer";
 import Magnet from "@/components/ui/magneticButton";
+import PhoneSlider from "@/components/iphone";
 
+const imageUrls = [
+    'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=800&fit=crop',
+    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=800&fit=crop'
+  ];
 
 const RasmlaiLanding = () => {
   const containerRef = useRef(null);
@@ -32,8 +36,6 @@ const RasmlaiLanding = () => {
     damping: 30,
     restDelta: 0.001,
   });
-  const phoneY = useTransform(smoothProgress, [0, 0.5], ["0%", "-20%"]);
-  const phoneRotate = useTransform(smoothProgress, [0, 0.3], [0, 15]);
 
   // Parallax transforms
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "50%"]);
@@ -163,24 +165,13 @@ const RasmlaiLanding = () => {
 
           <div className="">
 
-
-    <ModelViewer
-      url={'./models/smartphone/scene.gltf'}
-      autoFrame={true}
-      fadeIn={true}
-      minZoomDistance={2}
-      defaultZoom={0.2}
-      width={600}
-      height={600}
-      showScreenshotButton={false}
-      placeholderSrc=""
-      environmentPreset="none"
-      onModelLoaded={() => {}}
+<PhoneSlider 
+      images={imageUrls} 
+      // videos={videoUrls} 
+      slideSpeed={4000} // 4 seconds per slide
     />
-
-
           </div>
-<div className="absolute top-40 right-20"></div>
+
         </div>
       </section>
 
