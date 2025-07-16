@@ -73,212 +73,101 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 30 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.95, opacity: 0, y: 20 }}
-          transition={{
-            type: "spring",
-            stiffness: 400,
-            damping: 25,
-            duration: 0.3,
-          }}
-          className="bg-white/95 backdrop-blur-xl rounded-3xl p-0 w-full max-w-lg shadow-2xl border border-white/20 overflow-hidden"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="bg-white rounded-2xl w-full max-w-md shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Gradient Header */}
-          <div className="bg-gradient-to-br from-red-500 via-pink-500 to-purple-600 p-8 text-white relative overflow-hidden">
-            {/* Floating Background Elements */}
-            <motion.div
-              animate={{
-                x: [0, 100, 0],
-                y: [0, -50, 0],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-xl"
-            />
-            <motion.div
-              animate={{
-                x: [0, -80, 0],
-                y: [0, 60, 0],
-                rotate: [360, 180, 0],
-              }}
-              transition={{
-                duration: 15,
-                repeat: Infinity,
-                ease: "linear",
-                delay: 5,
-              }}
-              className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full blur-lg"
-            />
-
-            <motion.button
-              onClick={onClose}
-              whileHover={{ scale: 1.1, rotate: 90 }}
-              whileTap={{ scale: 0.9 }}
-              className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-all duration-200 backdrop-blur-sm"
-            >
-              <span className="text-white text-xl font-light">×</span>
-            </motion.button>
-
-            <div className="relative z-10">
-              <motion.div
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{
-                  delay: 0.2,
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 15,
-                }}
-                className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/30"
+          {/* Header */}
+          <div className="px-6 py-6 border-b border-gray-100">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                {/* Logo - Replace this div with your actual logo */}
+                <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">R</span>
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    Join Rasmlai
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    Be first to know when we launch
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 text-2xl"
               >
-                <motion.span
-                  className="text-white text-3xl"
-                  animate={{
-                    rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  ✨
-                </motion.span>
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-3xl font-bold mb-3 text-center"
-              >
-                Join the Waitlist
-              </motion.h2>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-white/90 text-center text-lg"
-              >
-                Be first to experience emotional freedom
-              </motion.p>
+                ×
+              </button>
             </div>
           </div>
 
-          {/* Content Area */}
-          <div className="p-8">
-            {/* Success State */}
+          {/* Content */}
+          <div className="p-6">
             <AnimatePresence mode="wait">
+              {/* Success State */}
               {submitStatus === "success" && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                   className="text-center py-8"
                 >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      delay: 0.2,
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15,
-                    }}
-                    className="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6 relative overflow-hidden"
-                  >
-                    <motion.div
-                      animate={{ scale: [0, 1.5, 0] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeOut",
-                      }}
-                      className="absolute inset-0 bg-green-400 rounded-2xl opacity-20"
-                    />
-                    <span className="text-green-600 text-3xl relative z-10">
-                      ✓
-                    </span>
-                  </motion.div>
-                  <h3 className="text-3xl font-bold text-gray-800 mb-4">
-                    🎉 Welcome aboard!
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-green-600 text-2xl">✓</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    You're on the list!
                   </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    You&apos;re now on the waitlist! We&apos;ll notify you the
-                    moment Rasmlai is ready to help you on your emotional
-                    journey.
+                  <p className="text-gray-600">
+                    We'll notify you when Rasmlai is ready.
                   </p>
                 </motion.div>
               )}
-            </AnimatePresence>
 
-            {/* Duplicate Email State */}
-            <AnimatePresence mode="wait">
+              {/* Duplicate State */}
               {submitStatus === "duplicate" && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                   className="text-center py-8"
                 >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      delay: 0.2,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                    className="w-20 h-20 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-6"
-                  >
-                    <span className="text-amber-600 text-3xl">👋</span>
-                  </motion.div>
-                  <h3 className="text-3xl font-bold text-amber-600 mb-4">
-                    You&apos;re already in!
+                  <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-amber-600 text-2xl">👋</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-amber-600 mb-2">
+                    You're already in!
                   </h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    This email is already on our waitlist. We&apos;ll be in
-                    touch soon with updates!
+                  <p className="text-gray-600">
+                    This email is already on our waitlist.
                   </p>
                 </motion.div>
               )}
-            </AnimatePresence>
 
-            {/* Form */}
-            {(submitStatus === "idle" || submitStatus === "error") && (
-              <motion.form
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onSubmit={handleSubmit}
-                className="space-y-6"
-              >
-                {/* Name Input */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="relative"
+              {/* Form */}
+              {(submitStatus === "idle" || submitStatus === "error") && (
+                <motion.form
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
                 >
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-semibold text-gray-700 mb-3"
-                  >
-                    Full Name
-                  </label>
-                  <div className="relative">
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Full Name
+                    </label>
                     <input
                       type="text"
                       id="name"
@@ -286,33 +175,18 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:border-red-400 focus:bg-white focus:outline-none transition-all duration-300 text-gray-800 text-lg placeholder:text-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                       placeholder="Enter your full name"
                     />
-                    <motion.div
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: formData.name ? 1 : 0 }}
-                    >
-                      👤
-                    </motion.div>
                   </div>
-                </motion.div>
 
-                {/* Email Input */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="relative"
-                >
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold text-gray-700 mb-3"
-                  >
-                    Email Address
-                  </label>
-                  <div className="relative">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Email Address
+                    </label>
                     <input
                       type="email"
                       id="email"
@@ -320,64 +194,29 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-6 py-4 bg-gray-50/80 border-2 border-gray-200/60 rounded-2xl focus:border-red-400 focus:bg-white focus:outline-none transition-all duration-300 text-gray-800 text-lg placeholder:text-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                       placeholder="Enter your email address"
                     />
-                    <motion.div
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: formData.email ? 1 : 0 }}
-                    >
-                      📧
-                    </motion.div>
                   </div>
-                </motion.div>
 
-                {/* Error Message */}
-                <AnimatePresence>
+                  {/* Error Message */}
                   {submitStatus === "error" && (
                     <motion.div
-                      initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                      className="bg-red-50 border border-red-200 rounded-2xl p-4"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-red-50 border border-red-200 rounded-lg p-3"
                     >
-                      <div className="flex items-center">
-                        <span className="text-red-500 text-xl mr-3">⚠️</span>
-                        <p className="text-red-600 font-medium">
-                          {errorMessage}
-                        </p>
-                      </div>
+                      <p className="text-red-600 text-sm">{errorMessage}</p>
                     </motion.div>
                   )}
-                </AnimatePresence>
 
-                {/* Submit Button */}
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting || !formData.name || !formData.email}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: "0 20px 40px rgba(239, 68, 68, 0.2)",
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="relative w-full bg-gradient-to-r from-red-500 via-pink-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none overflow-hidden group"
-                >
-                  {/* Button Background Animation */}
-                  <motion.div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                  <AnimatePresence mode="wait">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !formData.name || !formData.email}
+                    className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-lg font-semibold hover:from-red-600 hover:to-pink-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
                     {isSubmitting ? (
-                      <motion.div
-                        key="loading"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="flex items-center justify-center relative z-10"
-                      >
+                      <span className="flex items-center justify-center">
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{
@@ -385,49 +224,22 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                             repeat: Infinity,
                             ease: "linear",
                           }}
-                          className="w-6 h-6 border-2 border-white border-t-transparent rounded-full mr-3"
+                          className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
                         />
-                        <span>Joining waitlist...</span>
-                      </motion.div>
+                        Joining...
+                      </span>
                     ) : (
-                      <motion.span
-                        key="text"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="relative z-10 flex items-center justify-center"
-                      >
-                        <span className="mr-2">✨</span>
-                        Join the Waitlist
-                        <span className="ml-2">→</span>
-                      </motion.span>
+                      "Join Waitlist"
                     )}
-                  </AnimatePresence>
-                </motion.button>
+                  </button>
 
-                {/* Privacy Note */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4 }}
-                  className="bg-gray-50 rounded-2xl p-4 border border-gray-100"
-                >
-                  <div className="flex items-start">
-                    <span className="text-gray-400 mr-3 mt-0.5">🔒</span>
-                    <div>
-                      <p className="text-sm text-gray-600 leading-relaxed">
-                        <span className="font-semibold text-gray-700">
-                          Privacy guaranteed.
-                        </span>{" "}
-                        We&apos;ll only use your information to notify you about
-                        Rasmlai&apos;s launch. No spam, no sharing with third
-                        parties.
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.form>
-            )}
+                  <p className="text-xs text-gray-500 text-center mt-4">
+                    We'll only use your email to notify you about Rasmlai's
+                    launch.
+                  </p>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </motion.div>
