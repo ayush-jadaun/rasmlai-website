@@ -10,7 +10,7 @@ interface MagnetProps {
   wrapperClassName?: string;
   innerClassName?: string;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
-  [key: string]: any; // For additional props
+  [key: string]: unknown; // For additional props
 }
 
 const Magnet = ({

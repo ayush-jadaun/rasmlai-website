@@ -89,13 +89,13 @@ const slideVariants: Variants = {
 
 
 
-const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-};
-
+  
   useEffect(() => {
+    const paginate = (newDirection: number) => {
+        setPage([page + newDirection, newDirection]);
+    };
     paginate(1);
-  }, [currentIndex]);
+  }, [currentIndex,page]);
 
   return (
     <div className="flex items-center justify-center min-h-screen p-8">
