@@ -176,7 +176,7 @@ const RasmlaiLanding = () => {
       </section>
 
       {/* Emotional Story Section */}
-      <Emotional />
+      {/* <Emotional /> */}
 
       {/* How It Works Section */}
       <HowitWorks />
@@ -185,7 +185,7 @@ const RasmlaiLanding = () => {
       <EmotionalColor />
 
       {/* Testimonials Section */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* Final CTA Section */}
       <CalltoAction openWaitlist={() => setIsWaitlistOpen(true)} />
