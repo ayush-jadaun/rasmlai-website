@@ -9,10 +9,8 @@ import {
 
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
-import Testimonials from "../components/testimonials";
 import EmotionalColor from "../components/emotional-color";
 import HowitWorks from "../components/how-it-works";
-import Emotional from "../components/emotional";
 import WaitlistForm from "./../components/WaitlistForm";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
