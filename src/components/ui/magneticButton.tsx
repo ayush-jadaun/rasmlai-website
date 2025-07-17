@@ -4,7 +4,8 @@ import {
   useRef,
   ReactNode,
   MouseEvent,
-  HTMLAttributes,
+  useCallback,
+  HTMLAttributes
 } from "react";
 
 interface MagnetProps extends Omit<HTMLAttributes<HTMLDivElement>, "onClick"> {
@@ -17,6 +18,7 @@ interface MagnetProps extends Omit<HTMLAttributes<HTMLDivElement>, "onClick"> {
   wrapperClassName?: string;
   innerClassName?: string;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  [key: string]: unknown; // For additional props
 }
 
 const Magnet = ({
@@ -38,13 +40,8 @@ const Magnet = ({
   });
   const magnetRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (disabled) {
-      setPosition({ x: 0, y: 0 });
-      return;
-    }
-
-    const handleMouseMove = (e: globalThis.MouseEvent) => {
+  const handleMouseMove = useCallback(
+    (e: globalThis.MouseEvent) => {
       if (!magnetRef.current) return;
 
       const { left, top, width, height } =
@@ -55,23 +52,53 @@ const Magnet = ({
       const distX = Math.abs(centerX - e.clientX);
       const distY = Math.abs(centerY - e.clientY);
 
-      if (distX < width / 2 + padding && distY < height / 2 + padding) {
-        setIsActive(true);
+      const isWithinBounds =
+        distX < width / 2 + padding && distY < height / 2 + padding;
 
+      if (isWithinBounds) {
         const offsetX = (e.clientX - centerX) / magnetStrength;
         const offsetY = (e.clientY - centerY) / magnetStrength;
-        setPosition({ x: offsetX, y: offsetY });
+
+        setIsActive((prev) => {
+          if (!prev) return true;
+          return prev;
+        });
+
+        setPosition((prev) => {
+          if (
+            Math.abs(prev.x - offsetX) < 0.1 &&
+            Math.abs(prev.y - offsetY) < 0.1
+          ) {
+            return prev;
+          }
+          return { x: offsetX, y: offsetY };
+        });
       } else {
-        setIsActive(false);
-        setPosition({ x: 0, y: 0 });
+        setIsActive((prev) => {
+          if (prev) return false;
+          return prev;
+        });
+
+        setPosition((prev) => {
+          if (prev.x === 0 && prev.y === 0) return prev;
+          return { x: 0, y: 0 };
+        });
       }
-    };
+    },
+    [padding, magnetStrength]
+  );
+
+  useEffect(() => {
+    if (disabled) {
+      setPosition({ x: 0, y: 0 });
+      return;
+    }
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [padding, disabled, magnetStrength]);
+  }, [disabled, handleMouseMove]);
 
   const transitionStyle = isActive ? activeTransition : inactiveTransition;
 
