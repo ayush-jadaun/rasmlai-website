@@ -32,7 +32,7 @@ function HowitWorks() {
       step: "02",
       title: "Start Talking",
       subtitle: "Express Your Truth",
-      description: "Share your feelings through voice or text in our completely private space. No judgment, just support - express yourself exactly as you are in this moment.",
+      description: "Share your feelings through voice in our completely private space. No judgment, just support - express yourself exactly as you are in this moment.",
       details: "Our advanced AI listens with empathy and understanding, providing a safe container for all your emotions. Whether you're angry, sad, confused, or overwhelmed - you're heard.",
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-50",

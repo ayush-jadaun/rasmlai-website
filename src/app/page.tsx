@@ -10,11 +10,16 @@ import WaitlistForm from "./../components/WaitlistForm";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
 import Image from "next/image";
+import RasmlaiShowcase from "@/components/emotional";
+
 
 const imageUrls = [
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop",
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=800&fit=crop",
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=800&fit=crop",
+  "/images/onboarding1.png",
+  "/images/onboarding2.png",
+  "/images/onboarding3.png",
+  "/images/login.png",
+  "/images/homescreen.png",
+  "/images/call.png",
 ];
 
 const RasmlaiLanding = () => {
@@ -48,18 +53,18 @@ const RasmlaiLanding = () => {
     },
   };
 
-  const letterVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: -90 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
+const letterVariants = {
+  hidden: { opacity: 0, y: 50, rotateX: -90 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      // Remove the ease property entirely to use default easing
     },
-  };
+  },
+};
 
   const brandName = "Rasmlai";
 
@@ -337,12 +342,13 @@ const RasmlaiLanding = () => {
           </motion.div>
         </div>
       </section>
+      <RasmlaiShowcase/>
 
       {/* How It Works Section */}
       <HowitWorks />
 
       {/* Emotional Colors Section */}
-      <EmotionalColor />
+      {/* <EmotionalColor /> */}
 
       {/* Final CTA Section */}
       <CalltoAction openWaitlist={() => setIsWaitlistOpen(true)} />

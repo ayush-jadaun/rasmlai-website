@@ -1,49 +1,50 @@
-import type { Variants } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import type { Variants } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
 interface PhoneSliderProps {
-    images?: string[];
-    videos?: string[];
-    slideSpeed?: number;
+  images?: string[];
+  videos?: string[];
+  slideSpeed?: number;
 }
 
- const PhoneSlider = ({ 
-  images = [], 
-  videos = [], 
-  slideSpeed = 3000 // Speed Configuration: Change this value to adjust slide speed (in milliseconds)
+const PhoneSlider = ({
+  images = [],
+  videos = [],
+  slideSpeed = 3000, // Speed Configuration: Change this value to adjust slide speed (in milliseconds)
 }: PhoneSliderProps) => {
   // Combine images and videos into a single media array
   const mediaContent = [
-    ...images.map(img => ({
-      type: 'image',
+    ...images.map((img) => ({
+      type: "image",
       url: img,
-      alt: 'Image content'
+      alt: "Image content",
     })),
-    ...videos.map(vid => ({
-      type: 'video',
+    ...videos.map((vid) => ({
+      type: "video",
       url: vid,
-      alt: 'Video content'
-    }))
+      alt: "Video content",
+    })),
   ];
 
   // Default content if no media provided
   const defaultContent = [
     {
-      type: 'image',
-      url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop',
-      alt: 'Mountain landscape'
+      type: "image",
+      url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=800&fit=crop",
+      alt: "Mountain landscape",
     },
     {
-      type: 'image',
-      url: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=800&fit=crop',
-      alt: 'Nature scene'
+      type: "image",
+      url: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=800&fit=crop",
+      alt: "Nature scene",
     },
     {
-      type: 'image',
-      url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=800&fit=crop',
-      alt: 'Forest path'
-    }
+      type: "image",
+      url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=800&fit=crop",
+      alt: "Forest path",
+    },
   ];
 
   const finalContent = mediaContent.length > 0 ? mediaContent : defaultContent;
@@ -52,54 +53,44 @@ interface PhoneSliderProps {
   const SLIDE_SPEED = slideSpeed;
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % finalContent.length);
+      setCurrentIndex((prevIndex) => {
+        const newIndex = (prevIndex + 1) % finalContent.length;
+        setDirection(1); // Set direction when auto-sliding
+        return newIndex;
+      });
     }, SLIDE_SPEED);
 
     return () => clearInterval(interval);
   }, [finalContent.length, SLIDE_SPEED]);
 
   // Animation variants for smooth transitions
-// Remove SlideVariants interface and use Variants type from framer-motion
-
-const slideVariants: Variants = {
+  const slideVariants: Variants = {
     enter: (custom: number) => ({
-        x: custom > 0 ? 1000 : -1000,
-        opacity: 0,
-        scale: 0.8
+      x: custom > 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
     }),
     center: {
-        zIndex: 1,
-        x: 0,
-        opacity: 1,
-        scale: 1
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1,
     },
     exit: (custom: number) => ({
-        zIndex: 0,
-        x: custom < 0 ? 1000 : -1000,
-        opacity: 0,
-        scale: 0.8
-    })
-};
-
-  const [[page, direction], setPage] = useState([0, 0]);
-
-
-
-
-  
-  useEffect(() => {
-    const paginate = (newDirection: number) => {
-        setPage([page + newDirection, newDirection]);
-    };
-    paginate(1);
-  }, [currentIndex,page]);
+      zIndex: 0,
+      x: custom < 0 ? 1000 : -1000,
+      opacity: 0,
+      scale: 0.8,
+    }),
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen p-8">
-      <motion.div 
+      <motion.div
         className="relative"
         animate={{
           y: [0, -15, 0],
@@ -111,40 +102,38 @@ const slideVariants: Variants = {
           duration: 6,
           repeat: Infinity,
           ease: "easeInOut",
-          times: [0, 0.2, 0.5, 0.8, 1]
+          times: [0, 0.2, 0.5, 0.8, 1],
         }}
         style={{
           transformStyle: "preserve-3d",
-          perspective: "1000px"
+          perspective: "1000px",
         }}
       >
         {/* iPhone Frame */}
-        <motion.div 
+        <motion.div
           className="relative w-[280px] h-[570px] bg-black rounded-[60px] p-2 shadow-2xl"
           animate={{
             boxShadow: [
               "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               "0 35px 60px -12px rgba(0, 0, 0, 0.35)",
-              "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-            ]
+              "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+            ],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           {/* Phone Border */}
           <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-[50px] p-1">
             {/* Screen Container */}
             <div className="relative w-full h-full bg-black rounded-[45px] overflow-hidden">
-              
               {/* Dynamic Island */}
               <div className="absolute top-2 left-1/2 transform -translate-x-1/2 z-20">
                 <div className="w-32 h-7 bg-black rounded-full shadow-lg flex items-center justify-center">
                   <div className="flex items-center space-x-2">
                     <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
-                    <div className="w-16 h-2 bg-gray-800 rounded-full"></div>
                   </div>
                 </div>
               </div>
@@ -162,16 +151,16 @@ const slideVariants: Variants = {
                     transition={{
                       x: { type: "spring", stiffness: 300, damping: 30 },
                       opacity: { duration: 0.6 },
-                      scale: { duration: 0.4 }
+                      scale: { duration: 0.4 },
                     }}
                     className="absolute inset-0"
                   >
-                    {finalContent[currentIndex].type === 'image' ? (
+                    {finalContent[currentIndex].type === "image" ? (
                       <Image
                         src={finalContent[currentIndex].url}
                         alt={finalContent[currentIndex].alt}
-                        // className="w-full h-full object-cover"
                         fill={true}
+                        className="object-cover"
                       />
                     ) : (
                       <video
@@ -195,11 +184,11 @@ const slideVariants: Variants = {
                   <motion.div
                     key={index}
                     className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex ? 'bg-white' : 'bg-white/40'
+                      index === currentIndex ? "bg-white" : "bg-white/40"
                     }`}
                     animate={{
                       scale: index === currentIndex ? 1.2 : 1,
-                      opacity: index === currentIndex ? 1 : 0.6
+                      opacity: index === currentIndex ? 1 : 0.6,
                     }}
                     transition={{ duration: 0.2 }}
                   />
@@ -220,25 +209,25 @@ const slideVariants: Variants = {
           className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-8 bg-black/20 rounded-full blur-xl"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
 
         {/* Reflection Effect */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-[60px] pointer-events-none"
           animate={{
-            opacity: [0.1, 0.2, 0.1]
+            opacity: [0.1, 0.2, 0.1],
           }}
           transition={{
             duration: 5,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
       </motion.div>
@@ -246,5 +235,4 @@ const slideVariants: Variants = {
   );
 };
 
-export default PhoneSlider 
-
+export default PhoneSlider;
