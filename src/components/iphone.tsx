@@ -179,7 +179,7 @@ const PhoneSlider = ({
               </div>
 
               {/* Progress Indicators */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
                 {finalContent.map((_, index) => (
                   <motion.div
                     key={index}

@@ -2,13 +2,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Magnet from "@/components/ui/magneticButton";
-
+import { useRouter } from "next/navigation";
 
 interface CalltoActionProps {
   openWaitlist: () => void;
 }
 
-const CalltoAction: React.FC<CalltoActionProps> = ({ openWaitlist }) => {
+const CalltoAction: React.FC<CalltoActionProps> = () => {
+  const router = useRouter();
   return (
     <section className="py-20 px-4 relative bg-gradient-to-r from-red-600 to-purple-600 text-white overflow-hidden">
       <motion.div
@@ -58,7 +59,9 @@ const CalltoAction: React.FC<CalltoActionProps> = ({ openWaitlist }) => {
         >
           {/* Add Magnet component wrapping the button */}
           <Magnet
-            onClick={openWaitlist}
+            onClick={()=>{
+              router.push('/waitlist');
+            }}
             padding={150}
             magnetStrength={2.5}
             wrapperClassName="inline-block"

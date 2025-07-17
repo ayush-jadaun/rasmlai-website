@@ -10,8 +10,8 @@ interface WaitlistEntry {
   notified: boolean;
 }
 
-const ADMIN_PASSCODE = process.env.ADMIN_CODE!;
-
+const ADMIN_PASSCODE = process.env.ADMIN_CODE! || 741852;
+console.log("Admin:",ADMIN_PASSCODE);
 export default function AdminWaitlist() {
   const [entries, setEntries] = useState<WaitlistEntry[]>([]);
   const [loading, setLoading] = useState(true);
