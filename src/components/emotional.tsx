@@ -197,7 +197,7 @@ const RasmlaiShowcase = ( {slideSpeed = 4000} ) => {
         <div className="grid lg:grid-cols-2 sm:gap-12 lg:gap-6 ">
           {/* Phone Component - Top on mobile, Left on desktop */}
           <motion.div
-            className="flex justify-center md:justify-start order-1 lg:order-1"
+            className="flex justify-center items-start -mt-15 md:justify-start order-1 lg:order-1"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
