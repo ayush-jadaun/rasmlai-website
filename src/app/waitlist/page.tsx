@@ -107,17 +107,19 @@ const WaitlistForm: React.FC = () => {
         {/* Form and Image Section - Aligned */}
         <div className="flex-1 flex items-center justify-center px-4 pb-8">
           <div className="w-full max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-40 items-center">
-              {/* Left Side - Form */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col justify-center"
-              >
-                {/* Form Card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-2xl lg:rounded-3xl shadow-xl overflow-hidden border border-white/20 max-w-lg mx-auto lg:mx-0">
-                  <div className="p-6 lg:p-8">
+            {/* Extended Card Background */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl lg:rounded-3xl shadow-xl overflow-hidden border border-white/20">
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center p-6 lg:p-8">
+                {/* Left Side - Form */}
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="flex flex-col justify-center"
+                >
+                  {/* Form Content */}
+                  <div className="max-w-lg mx-auto lg:mx-0">
+                  <div className="max-w-lg mx-auto lg:mx-0">
                     <AnimatePresence mode="wait">
                       {/* Success State */}
                       {submitStatus === "success" && (
@@ -278,33 +280,34 @@ const WaitlistForm: React.FC = () => {
                 </div>
               </motion.div>
 
-              {/* Right Side - Mental Health Illustration */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex items-center justify-center"
-              >
-                <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
-                  <div className="relative px-4 sm:px-0">
-                    <div className="w-full aspect-square max-w-[320px] sm:max-w-[400px] lg:max-w-[480px] mx-auto">
-                      <Image
-                        width={1000}
-                        height={1000}
-                        src="/images/waitlist2.png"
-                        alt="Mental Health Wellness"
-                        className="w-full h-full object-contain"
-                        style={{
-                          filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.1))"
-                        }}
-                      />
+                {/* Right Side - Mental Health Illustration */}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="flex items-center justify-center"
+                >
+                  <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
+                    <div className="relative px-4 sm:px-0">
+                      <div className="w-full aspect-square max-w-[320px] sm:max-w-[400px] lg:max-w-[480px] mx-auto">
+                        <Image
+                          width={1000}
+                          height={1000}
+                          src="/images/waitlist2.png"
+                          alt="Mental Health Wellness"
+                          className="w-full h-full object-contain"
+                          style={{
+                            filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.1))"
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Subtle glow effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-pink-400/15 rounded-full blur-3xl -z-10 transform scale-110"></div>
                     </div>
-                    
-                    {/* Subtle glow effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-red-400/15 to-pink-400/15 rounded-full blur-3xl -z-10 transform scale-110"></div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>

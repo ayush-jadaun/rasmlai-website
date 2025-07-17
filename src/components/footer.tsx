@@ -39,7 +39,7 @@ const Footer = () => {
             
             {/* Copyright */}
             <div className="text-gray-400 text-xs sm:text-sm md:text-base text-center sm:text-left order-2 sm:order-1">
-              <span className="block sm:inline">© 2024 Rasmlai. All rights reserved.</span>
+              <span className="block sm:inline">© 2025 Rasmlai. All rights reserved.</span>
               <span className="block sm:inline sm:ml-2">Made with ❤️ for mental wellness.</span>
             </div>
             
