@@ -124,10 +124,10 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                     <span className="text-green-600 text-2xl">✓</span>
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    You're on the list!
+                    You&apos;re on the list!
                   </h3>
                   <p className="text-gray-600">
-                    We'll notify you when Rasmlai is ready.
+                    We&apos;ll notify you when Rasmlai is ready.
                   </p>
                 </motion.div>
               )}
@@ -144,7 +144,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                     <span className="text-amber-600 text-2xl">👋</span>
                   </div>
                   <h3 className="text-xl font-bold text-amber-600 mb-2">
-                    You're already in!
+                    You&apos;re already in!
                   </h3>
                   <p className="text-gray-600">
                     This email is already on our waitlist.
@@ -234,8 +234,8 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ isOpen, onClose }) => {
                   </button>
 
                   <p className="text-xs text-gray-500 text-center mt-4">
-                    We'll only use your email to notify you about Rasmlai's
-                    launch.
+                    We&apos;ll only use your email to notify you about
+                    Rasmlai&apos;s launch.
                   </p>
                 </motion.form>
               )}

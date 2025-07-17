@@ -4,14 +4,13 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
-import EmotionalColor from "../components/emotional-color";
 import HowitWorks from "../components/how-it-works";
 import WaitlistForm from "./../components/WaitlistForm";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
 import Image from "next/image";
 import RasmlaiShowcase from "@/components/emotional";
-
+import logoImage from "../../public/images/rsml.png";
 
 const imageUrls = [
   "/images/onboarding1.png",
@@ -53,18 +52,18 @@ const RasmlaiLanding = () => {
     },
   };
 
-const letterVariants = {
-  hidden: { opacity: 0, y: 50, rotateX: -90 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      duration: 0.6,
-      // Remove the ease property entirely to use default easing
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        duration: 0.6,
+        // Remove the ease property entirely to use default easing
+      },
     },
-  },
-};
+  };
 
   const brandName = "Rasmlai";
 
@@ -127,7 +126,7 @@ const letterVariants = {
           className="flex items-center space-x-3"
           whileHover={{ scale: 1.05 }}
         >
-          <Image src={require("../../public/images/rsml.png")} height={70} width={60} alt="Logo"/>
+          <Image src={logoImage} height={70} width={60} alt="Logo" />
           <motion.span
             className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent"
             style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -135,8 +134,6 @@ const letterVariants = {
             {brandName}
           </motion.span>
         </motion.div>
-
-       
       </motion.nav>
 
       <section className="relative min-h-screen flex items-center justify-center px-4 -mt-20">
@@ -342,13 +339,10 @@ const letterVariants = {
           </motion.div>
         </div>
       </section>
-      <RasmlaiShowcase/>
+      <RasmlaiShowcase />
 
       {/* How It Works Section */}
       <HowitWorks />
-
-      {/* Emotional Colors Section */}
-      {/* <EmotionalColor /> */}
 
       {/* Final CTA Section */}
       <CalltoAction openWaitlist={() => setIsWaitlistOpen(true)} />
