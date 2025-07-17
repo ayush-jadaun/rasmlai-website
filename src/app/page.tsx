@@ -5,19 +5,16 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
 import HowitWorks from "../components/how-it-works";
-import WaitlistForm from "./../components/WaitlistForm";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
-import Image from "next/image";
 import RasmlaiShowcase from "@/components/emotional";
-import logoImage from "../../public/images/rsml.png";
 
 const imageUrls = [
   "/images/onboarding1.png",
   "/images/onboarding2.png",
   "/images/onboarding3.png",
   "/images/login.png",
-  "/images/homescreen.png",
+  // "/images/homescreen.png",
   "/images/call.png",
 ];
 
@@ -65,7 +62,6 @@ const RasmlaiLanding = () => {
     },
   };
 
-  const brandName = "Rasmlai";
 
   return (
     <div
@@ -114,30 +110,8 @@ const RasmlaiLanding = () => {
           />
         </svg>
       </motion.div>
-
-      {/* Navigation Header */}
-      <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-50 flex items-center justify-between px-8 py-6"
-      >
-        <motion.div
-          className="flex items-center space-x-3"
-          whileHover={{ scale: 1.05 }}
-        >
-          <Image src={logoImage} height={70} width={60} alt="Logo" />
-          <motion.span
-            className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-          >
-            {brandName}
-          </motion.span>
-        </motion.div>
-      </motion.nav>
-
-      <section className="relative min-h-screen flex items-center justify-center px-4 -mt-20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center justify-between">
+      <section className="relative md:min-h-screen flex px-4">
+        <div className="max-w-7xl mx-auto flex mt-20 md:items-center md:justify-center gap-x-50">
           {/* Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -145,50 +119,7 @@ const RasmlaiLanding = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center lg:text-left"
           >
-            {/* Brand Name with Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4"
-            >
-              <motion.h2
-                className="text-2xl font-bold text-red-600 mb-2"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                {brandName.split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="inline-block"
-                    whileHover={{
-                      scale: 1.2,
-                      color: "#ec4899",
-                      transition: { duration: 0.2 },
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </motion.h2>
-              <motion.div
-                className="h-1 bg-gradient-to-r from-red-500 to-pink-500 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: "100%" }}
-                transition={{ duration: 1, delay: 0.8 }}
-              />
-            </motion.div>
-
+      
             <motion.div
               variants={titleVariants}
               initial="hidden"
@@ -254,6 +185,7 @@ const RasmlaiLanding = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
+              className="flex justify-center md:justify-start"
             >
               <Magnet
                 onClick={() => setIsWaitlistOpen(true)}
@@ -330,7 +262,7 @@ const RasmlaiLanding = () => {
           </motion.div>
 
           <motion.div
-            className=""
+            className="hidden md:block"  
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -349,12 +281,6 @@ const RasmlaiLanding = () => {
 
       {/* Footer */}
       <Footer />
-
-      {/* WaitlistForm component */}
-      <WaitlistForm
-        isOpen={isWaitlistOpen}
-        onClose={() => setIsWaitlistOpen(false)}
-      />
     </div>
   );
 };

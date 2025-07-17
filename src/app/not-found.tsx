@@ -128,50 +128,6 @@ export default function NotFound() {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="mb-12"
         >
-          <p className="text-lg text-gray-500 mb-8">
-            Here are some things you can try:
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            {[
-              {
-                icon: "🏠",
-                title: "Go Home",
-                desc: "Return to our main page",
-                action: "home",
-              },
-              {
-                icon: "🤝",
-                title: "Get Support",
-                desc: "Visit our help center",
-                action: "support",
-              },
-              {
-                icon: "📝",
-                title: "Join Waitlist",
-                desc: "Be first to try Rasmlai",
-                action: "waitlist",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.4 + index * 0.2 }}
-                whileHover={{
-                  y: -10,
-                  scale: 1.05,
-                }}
-                className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
-              >
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold mb-2 text-gray-800">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Action Buttons */}
@@ -284,23 +240,6 @@ export default function NotFound() {
           <div className="w-6 h-6 bg-purple-200 rounded-full blur-sm"></div>
         </motion.div>
       </div>
-
-      {/* Brand Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <Link href="/">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="text-xl font-bold bg-gradient-to-r from-red-600 to-purple-600 bg-clip-text text-transparent cursor-pointer"
-          >
-            Rasmlai
-          </motion.div>
-        </Link>
-      </motion.div>
     </div>
   );
 }
