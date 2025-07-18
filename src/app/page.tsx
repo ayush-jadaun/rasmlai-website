@@ -63,7 +63,6 @@ const RasmlaiLanding = () => {
     },
   };
 
-
   return (
     <div
       ref={containerRef}
@@ -73,6 +72,61 @@ const RasmlaiLanding = () => {
           "'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
       }}
     >
+      {/* Brand Header */}
+      <motion.div
+        className="relative z-50 text-center pt-8"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+      >
+        <motion.h1
+          className="text-2xl md:text-8xl lg:text-6xl font-black tracking-wider"
+          style={{
+            fontFamily: "'Poppins', sans-serif",
+            fontWeight: 900,
+          }}
+          animate={{
+            textShadow: [
+              "0 0 20px rgba(239, 68, 68, 0.3)",
+              "0 0 40px rgba(239, 68, 68, 0.5)",
+              "0 0 20px rgba(239, 68, 68, 0.3)",
+            ],
+          }}
+          transition={{
+            textShadow: {
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
+        >
+          <motion.span
+            className="bg-gradient-to-r from-red-600 via-pink-600 to-red-600 bg-clip-text text-transparent inline-block"
+            animate={{
+              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            }}
+            transition={{
+              backgroundPosition: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+            style={{
+              backgroundSize: "100% 100",
+            }}
+          >
+            RASMLAI
+          </motion.span>
+        </motion.h1>
+        <motion.div
+          className="w-32 h-1 bg-gradient-to-r from-red-500 to-pink-500 mx-auto mt-2"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        />
+      </motion.div>
+
       {/* Animated Background Elements */}
       <motion.div
         style={{ y: backgroundY }}
@@ -112,7 +166,7 @@ const RasmlaiLanding = () => {
         </svg>
       </motion.div>
       <section className="relative md:min-h-screen flex px-4">
-        <div className="max-w-7xl mx-auto flex mt-20 md:items-center md:justify-center gap-x-50">
+        <div className="max-w-7xl mx-auto flex md:items-center md:justify-center gap-x-50">
           {/* Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -120,7 +174,6 @@ const RasmlaiLanding = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-center lg:text-left"
           >
-      
             <motion.div
               variants={titleVariants}
               initial="hidden"
@@ -147,7 +200,7 @@ const RasmlaiLanding = () => {
                     },
                   }}
                 >
-                  Self Reflection 
+                  Self Reflection
                 </motion.span>
                 <br />
                 <motion.span
@@ -189,11 +242,10 @@ const RasmlaiLanding = () => {
               className="flex justify-center md:justify-start"
             >
               <Magnet
-                onClick={() =>  router.push('/waitlist')}
+                onClick={() => router.push("/waitlist")}
                 padding={120}
                 magnetStrength={3}
                 wrapperClassName="inline-block"
-                
               >
                 <motion.button
                   className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
@@ -264,7 +316,7 @@ const RasmlaiLanding = () => {
           </motion.div>
 
           <motion.div
-            className="hidden md:block"  
+            className="hidden md:block"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
