@@ -8,13 +8,13 @@ import HowitWorks from "../components/how-it-works";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
 import RasmlaiShowcase from "@/components/emotional";
-
+import { useRouter } from "next/navigation";
 const imageUrls = [
   "/images/onboarding1.png",
   "/images/onboarding2.png",
   "/images/onboarding3.png",
   "/images/login.png",
-  // "/images/homescreen.png",
+  "/images/homescreen.png",
   "/images/call.png",
 ];
 
@@ -26,6 +26,7 @@ const RasmlaiLanding = () => {
     target: containerRef,
     offset: ["start start", "end end"],
   });
+  const router = useRouter();
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -146,7 +147,7 @@ const RasmlaiLanding = () => {
                     },
                   }}
                 >
-                  Let Your Emotions
+                  Self Reflection 
                 </motion.span>
                 <br />
                 <motion.span
@@ -157,7 +158,7 @@ const RasmlaiLanding = () => {
                     textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
                   }}
                 >
-                  Flow Freely
+                  Is The Key
                 </motion.span>
               </motion.h1>
             </motion.div>
@@ -188,10 +189,11 @@ const RasmlaiLanding = () => {
               className="flex justify-center md:justify-start"
             >
               <Magnet
-                onClick={() => setIsWaitlistOpen(true)}
+                onClick={() =>  router.push('/waitlist')}
                 padding={120}
                 magnetStrength={3}
                 wrapperClassName="inline-block"
+                
               >
                 <motion.button
                   className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"

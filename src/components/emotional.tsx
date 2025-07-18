@@ -151,10 +151,11 @@ import PhoneSlider from "./iphone";
 
 const RasmlaiShowcase = ( {slideSpeed = 4000} ) => {
   const images = [
-    "/images/login.png",
-    // "/images/homescreen.png",
     "/images/onboarding1.png",
     "/images/onboarding2.png",
+    "/images/onboarding3.png",
+    "/images/login.png",
+    "/images/homescreen.png",
     "/images/call.png",
   ];
   const features = [
