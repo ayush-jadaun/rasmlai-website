@@ -332,7 +332,8 @@ const RasmlaiLanding = () => {
                   ease: "easeInOut",
                 }}
               >
-                with RASMLAI
+
+                Your emotions matter,Your Voice matters with <span className="font-bold  text-red-400 underline">RASMLAI</span>
               </motion.p>
             </motion.p>
           </motion.div>
