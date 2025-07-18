@@ -8,18 +8,21 @@ interface WaitlistEntry {
   email: string;
   joinedAt: string;
   notified: boolean;
+  position?: number;
 }
 
-const ADMIN_PASSCODE = process.env.ADMIN_CODE! || 741852;
-console.log("Admin:",ADMIN_PASSCODE);
+const ADMIN_PASSCODE = (process.env.ADMIN_CODE || "741852").toString();
+
 export default function AdminWaitlist() {
   const [entries, setEntries] = useState<WaitlistEntry[]>([]);
+  const [filteredEntries, setFilteredEntries] = useState<WaitlistEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ total: 0, page: 1, pages: 1 });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState("");
   const [isShaking, setIsShaking] = useState(false);
   const [attempts, setAttempts] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // Check if user was previously authenticated in this session
@@ -32,11 +35,37 @@ export default function AdminWaitlist() {
     }
   }, []);
 
+  useEffect(() => {
+    // Filter entries based on search term
+    if (searchTerm.trim() === "") {
+      setFilteredEntries(entries);
+    } else {
+      const filtered = entries.filter(
+        (entry) =>
+          entry.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          entry.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredEntries(filtered);
+    }
+  }, [searchTerm, entries]);
+
   const fetchEntries = async (page = 1) => {
     try {
-      const response = await fetch(`/api/waitlist?page=${page}&limit=50`);
+      const response = await fetch(`/api/waitlist?page=${page}&limit=1000`); // Get all entries
       const data = await response.json();
-      setEntries(data.data);
+
+      // Sort by joinedAt (oldest first) and add position numbers
+      const sortedEntries = data.data
+        .sort(
+          (a: WaitlistEntry, b: WaitlistEntry) =>
+            new Date(a.joinedAt).getTime() - new Date(b.joinedAt).getTime()
+        )
+        .map((entry: WaitlistEntry, index: number) => ({
+          ...entry,
+          position: index + 1,
+        }));
+
+      setEntries(sortedEntries);
       setStats(data.pagination);
     } catch (error) {
       console.error("Error fetching entries:", error);
@@ -83,6 +112,11 @@ export default function AdminWaitlist() {
     sessionStorage.removeItem("rasmlai_admin_auth");
     setPasscode("");
     setAttempts(0);
+    setSearchTerm("");
+  };
+
+  const clearSearch = () => {
+    setSearchTerm("");
   };
 
   // Passcode Entry Screen
@@ -246,7 +280,7 @@ export default function AdminWaitlist() {
           <h2 className="text-xl font-semibold mb-4 text-gray-800">
             Statistics
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 rounded-2xl">
               <p className="text-3xl font-bold text-blue-600">{stats.total}</p>
               <p className="text-blue-600 font-medium">Total Signups</p>
@@ -263,7 +297,73 @@ export default function AdminWaitlist() {
               </p>
               <p className="text-purple-600 font-medium">Pending</p>
             </div>
+            <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-6 rounded-2xl">
+              <p className="text-3xl font-bold text-orange-600">
+                {filteredEntries.length}
+              </p>
+              <p className="text-orange-600 font-medium">
+                {searchTerm ? "Search Results" : "Showing"}
+              </p>
+            </div>
           </div>
+        </motion.div>
+
+        {/* Search Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="bg-white rounded-3xl shadow-lg p-6 mb-8"
+        >
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <svg
+                className="h-5 w-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              placeholder="Search by name or email..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-12 py-3 border-2 border-gray-200 rounded-2xl focus:outline-none focus:border-red-500 transition-colors duration-300"
+            />
+            {searchTerm && (
+              <button
+                onClick={clearSearch}
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+              >
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
+          {searchTerm && (
+            <p className="text-sm text-gray-600 mt-2">
+              Showing {filteredEntries.length} of {entries.length} entries
+            </p>
+          )}
         </motion.div>
 
         {/* Table */}
@@ -279,14 +379,18 @@ export default function AdminWaitlist() {
             </h3>
           </div>
 
-          {entries.length === 0 ? (
+          {filteredEntries.length === 0 ? (
             <div className="p-12 text-center">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📝</span>
+                <span className="text-2xl">{searchTerm ? "🔍" : "📝"}</span>
               </div>
-              <p className="text-gray-500 text-lg">No waitlist entries yet</p>
+              <p className="text-gray-500 text-lg">
+                {searchTerm ? "No entries found" : "No waitlist entries yet"}
+              </p>
               <p className="text-gray-400">
-                Entries will appear here once users sign up
+                {searchTerm
+                  ? "Try searching with different terms"
+                  : "Entries will appear here once users sign up"}
               </p>
             </div>
           ) : (
@@ -294,6 +398,9 @@ export default function AdminWaitlist() {
               <table className="w-full">
                 <thead className="bg-gray-50">
                   <tr>
+                    <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      Position
+                    </th>
                     <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
                       Name
                     </th>
@@ -310,7 +417,7 @@ export default function AdminWaitlist() {
                 </thead>
                 <tbody>
                   <AnimatePresence>
-                    {entries.map((entry, index) => (
+                    {filteredEntries.map((entry, index) => (
                       <motion.tr
                         key={entry._id}
                         initial={{ opacity: 0, y: 20 }}
@@ -318,6 +425,13 @@ export default function AdminWaitlist() {
                         transition={{ delay: index * 0.05 }}
                         className="border-t border-gray-100 hover:bg-gray-50 transition-colors duration-150"
                       >
+                        <td className="px-6 py-4">
+                          <div className="flex items-center">
+                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-bold">
+                              #{entry.position}
+                            </span>
+                          </div>
+                        </td>
                         <td className="px-6 py-4 text-gray-800 font-medium">
                           {entry.name}
                         </td>
