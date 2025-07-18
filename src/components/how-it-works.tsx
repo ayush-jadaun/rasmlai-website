@@ -22,33 +22,39 @@ function HowitWorks() {
       step: "01",
       title: "Open the App",
       subtitle: "Access Your Safe Space",
-      description: "Launch Rasmlai whenever you need to express yourself. Our intuitive interface welcomes you into a judgment-free environment designed for emotional healing.",
-      details: "Available 24/7 on all devices, Rasmlai is always there when you need support. No appointments, no waiting - just immediate access to your personal emotional sanctuary.",
+      description:
+        "Launch Rasmlai whenever you need to express or reflect upon yourself. Our intuitive interface welcomes you into a judgment-free environment designed for emotional healing.",
+      details:
+        "Available 24/7 on all devices, Rasmlai is always there when you need support. No appointments, no waiting - just immediate access to your personal emotional sanctuary.",
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50",
-      borderColor: "border-purple-200"
+      borderColor: "border-purple-200",
     },
     {
       step: "02",
       title: "Start Talking",
       subtitle: "Express Your Truth",
-      description: "Share your feelings through voice in our completely private space. No judgment, just support - express yourself exactly as you are in this moment.",
-      details: "Our advanced AI listens with empathy and understanding, providing a safe container for all your emotions. Whether you're angry, sad, confused, or overwhelmed - you're heard.",
+      description:
+        "Share your feelings through voice in our completely private space. No judgment, just support - express yourself exactly as you are in this moment.",
+      details:
+        "Our advanced AI listens with empathy and understanding, providing a safe container for all your emotions. Whether you're angry, sad, confused, or overwhelmed - you're heard.",
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-50",
-      borderColor: "border-red-200"
+      borderColor: "border-red-200",
     },
     {
       step: "03",
       title: "Feel Better",
       subtitle: "Experience Relief & Growth",
-      description: "Experience immediate relief as you release pent-up emotions and gain valuable insights to help you move forward with clarity and renewed strength.",
-      details: "Our supportive responses help you process your feelings while providing gentle guidance and practical tools for emotional wellness and personal growth.",
+      description:
+        "Experience immediate relief as you release pent-up emotions and gain valuable insights to help you move forward with clarity and renewed strength.",
+      details:
+        "Our supportive responses help you process your feelings while providing gentle guidance and practical tools for emotional wellness and personal growth.",
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50",
-      borderColor: "border-green-200"
-    }
-  ]
+      borderColor: "border-green-200",
+    },
+  ];
 
   return (
     <section ref={containerRef} className="py-12 sm:py-16 md:py-20 px-2 sm:px-4 md:px-6 lg:px-8 bg-gradient-to-br from-red-50 via-pink-50 to-purple-50 relative overflow-hidden">
