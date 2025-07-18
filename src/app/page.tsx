@@ -180,7 +180,7 @@ const RasmlaiLanding = () => {
               animate="visible"
             >
               <motion.h1
-                className="text-5xl lg:text-7xl font-black mb-6 leading-tight"
+                className="text-4xl lg:text-6xl font-black mb-4 leading-tight"
                 style={{
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 900,
@@ -200,20 +200,41 @@ const RasmlaiLanding = () => {
                     },
                   }}
                 >
-                  Self Reflection
+                  Let Your Emotions
                 </motion.span>
                 <br />
                 <motion.span
-                  className="text-red-500 inline-block"
+                  className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent inline-block"
                   variants={letterVariants}
-                  whileHover={{
-                    scale: 1.05,
-                    textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                  }}
+                  transition={{
+                    backgroundPosition: {
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    },
                   }}
                 >
-                  Is The Key
+                  Flow Freely
                 </motion.span>
               </motion.h1>
+
+              <motion.h2
+                className="text-2xl lg:text-3xl font-bold mb-6 text-red-500"
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 700,
+                }}
+                variants={letterVariants}
+                whileHover={{
+                  scale: 1.05,
+                  textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
+                }}
+              >
+                Self Reflection Is The Key
+              </motion.h2>
             </motion.div>
 
             <motion.p
