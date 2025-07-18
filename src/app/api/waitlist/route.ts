@@ -93,11 +93,28 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "50");
+    const search = searchParams.get("search") || "";
     const skip = (page - 1) * limit;
 
+    // Build search query
+    let searchQuery = {};
+    if (search) {
+      searchQuery = {
+        $or: [
+          { name: { $regex: search, $options: "i" } },
+          { email: { $regex: search, $options: "i" } },
+        ],
+      };
+    }
+
+    // Sort by joinedAt in ascending order (oldest first, which is proper waitlist order)
     const [entries, total] = await Promise.all([
-      Waitlist.find({}).sort({ joinedAt: -1 }).skip(skip).limit(limit).lean(),
-      Waitlist.countDocuments({}),
+      Waitlist.find(searchQuery)
+        .sort({ joinedAt: 1 }) // 1 for ascending (oldest first)
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      Waitlist.countDocuments(searchQuery),
     ]);
 
     return NextResponse.json({
