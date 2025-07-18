@@ -160,6 +160,7 @@ const PhoneSlider = ({
                         src={finalContent[currentIndex].url}
                         alt={finalContent[currentIndex].alt}
                         fill={true}
+                        sizes="280px" // Added sizes prop - matches the phone width
                         className="object-cover"
                       />
                     ) : (
