@@ -321,7 +321,8 @@ const RasmlaiLanding = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <motion.span
+              <motion.p
+              className=""
                 animate={{
                   opacity: [0.5, 1, 0.5],
                 }}
@@ -331,8 +332,8 @@ const RasmlaiLanding = () => {
                   ease: "easeInOut",
                 }}
               >
-                Your emotions matter. Your voice matters.
-              </motion.span>
+                with RASMLAI
+              </motion.p>
             </motion.p>
           </motion.div>
 
