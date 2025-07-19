@@ -1,6 +1,6 @@
 import type { Variants } from "framer-motion";
 import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, AnimatePresence, PanInfo, PointerEventOptions } from "framer-motion";
 import Image from "next/image";
 
 interface PhoneSliderProps {
@@ -86,7 +86,10 @@ const PhoneSlider = ({
   }, [finalContent.length, slideSpeed, enableAutoSlide, isDragging, nextSlide]);
 
   // Handle drag end
-  const handleDragEnd = (event: any, info: PanInfo) => {
+  const handleDragEnd = (
+    event: MouseEvent | TouchEvent | PointerEventOptions,
+    info: PanInfo
+  ) => {
     setIsDragging(false);
 
     const threshold = 50; // Minimum distance to trigger swipe
@@ -247,8 +250,6 @@ const PhoneSlider = ({
                 ))}
               </div>
 
-              
-
               {/* Side Buttons */}
               <div className="absolute -left-1 top-20 w-1 h-8 bg-gray-700 rounded-l-sm"></div>
               <div className="absolute -left-1 top-32 w-1 h-12 bg-gray-700 rounded-l-sm"></div>
@@ -285,6 +286,8 @@ const PhoneSlider = ({
           }}
         />
       </motion.div>
+
+      
     </div>
   );
 };
