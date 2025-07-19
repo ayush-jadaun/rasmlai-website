@@ -1,18 +1,20 @@
 import type { Variants } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import Image from "next/image";
 
 interface PhoneSliderProps {
   images?: string[];
   videos?: string[];
   slideSpeed?: number;
+  enableAutoSlide?: boolean; // New prop to control auto-sliding
 }
 
 const PhoneSlider = ({
   images = [],
   videos = [],
-  slideSpeed = 3000, // Speed Configuration: Change this value to adjust slide speed (in milliseconds)
+  slideSpeed = 3000,
+  enableAutoSlide = true, // Auto-slide enabled by default
 }: PhoneSliderProps) => {
   // Combine images and videos into a single media array
   const mediaContent = [
@@ -49,23 +51,64 @@ const PhoneSlider = ({
 
   const finalContent = mediaContent.length > 0 ? mediaContent : defaultContent;
 
-  // Speed Configuration: Change this value to adjust slide speed (in milliseconds)
-  const SLIDE_SPEED = slideSpeed;
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
+  // Function to go to next slide
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % finalContent.length;
+      setDirection(1);
+      return newIndex;
+    });
+  }, [finalContent.length]);
+
+  // Function to go to previous slide
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex =
+        prevIndex === 0 ? finalContent.length - 1 : prevIndex - 1;
+      setDirection(-1);
+      return newIndex;
+    });
+  }, [finalContent.length]);
+
+  // Auto-slide effect
   useEffect(() => {
+    if (!enableAutoSlide || isDragging) return;
+
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % finalContent.length;
-        setDirection(1); // Set direction when auto-sliding
-        return newIndex;
-      });
-    }, SLIDE_SPEED);
+      nextSlide();
+    }, slideSpeed);
 
     return () => clearInterval(interval);
-  }, [finalContent.length, SLIDE_SPEED]);
+  }, [finalContent.length, slideSpeed, enableAutoSlide, isDragging, nextSlide]);
+
+  // Handle drag end
+  const handleDragEnd = (event: any, info: PanInfo) => {
+    setIsDragging(false);
+
+    const threshold = 50; // Minimum distance to trigger swipe
+    const velocity = info.velocity.x;
+    const offset = info.offset.x;
+
+    // Determine swipe direction based on drag distance and velocity
+    if (Math.abs(offset) > threshold || Math.abs(velocity) > 500) {
+      if (offset > 0 || velocity > 0) {
+        // Swiped right - go to previous slide
+        prevSlide();
+      } else {
+        // Swiped left - go to next slide
+        nextSlide();
+      }
+    }
+  };
+
+  // Handle drag start
+  const handleDragStart = () => {
+    setIsDragging(true);
+  };
 
   // Animation variants for smooth transitions
   const slideVariants: Variants = {
@@ -153,15 +196,22 @@ const PhoneSlider = ({
                       opacity: { duration: 0.6 },
                       scale: { duration: 0.4 },
                     }}
-                    className="absolute inset-0"
+                    className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragStart={handleDragStart}
+                    onDragEnd={handleDragEnd}
+                    whileDrag={{ scale: 0.95 }}
                   >
                     {finalContent[currentIndex].type === "image" ? (
                       <Image
                         src={finalContent[currentIndex].url}
                         alt={finalContent[currentIndex].alt}
                         fill={true}
-                        sizes="280px" // Added sizes prop - matches the phone width
-                        className="object-cover"
+                        sizes="280px"
+                        className="object-cover pointer-events-none select-none"
+                        draggable={false}
                       />
                     ) : (
                       <video
@@ -169,7 +219,8 @@ const PhoneSlider = ({
                         autoPlay
                         muted
                         loop
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover pointer-events-none select-none"
+                        draggable={false}
                       />
                     )}
                   </motion.div>
@@ -180,7 +231,7 @@ const PhoneSlider = ({
               </div>
 
               {/* Progress Indicators */}
-              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+              <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10 pointer-events-none">
                 {finalContent.map((_, index) => (
                   <motion.div
                     key={index}
@@ -195,6 +246,8 @@ const PhoneSlider = ({
                   />
                 ))}
               </div>
+
+              
 
               {/* Side Buttons */}
               <div className="absolute -left-1 top-20 w-1 h-8 bg-gray-700 rounded-l-sm"></div>
