@@ -212,6 +212,7 @@ const RasmlaiLanding = () => {
                 padding={120}
                 magnetStrength={3}
                 wrapperClassName="inline-block"
+                
               >
                 <motion.button
                   className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
@@ -242,7 +243,7 @@ const RasmlaiLanding = () => {
                     transition={{ duration: 0.3 }}
                   />
                   <motion.span
-                    className="relative z-10"
+                    className="relative z-10 "
                     animate={{
                       scale: [1, 1.02, 1],
                     }}
@@ -251,6 +252,7 @@ const RasmlaiLanding = () => {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
+                    
                   >
                     Start Your Journey
                   </motion.span>
@@ -266,6 +268,7 @@ const RasmlaiLanding = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
+
               <motion.p
                 className=""
               >
@@ -274,6 +277,8 @@ const RasmlaiLanding = () => {
                   RASMLAI
                 </p>
               </motion.p>
+
+              
             </motion.p>
           </motion.div>
 

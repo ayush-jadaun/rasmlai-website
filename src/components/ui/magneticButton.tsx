@@ -106,7 +106,11 @@ const Magnet = ({
     <div
       ref={magnetRef}
       className={wrapperClassName}
-      style={{ position: "relative", display: "inline-block" }}
+      style={{
+        position: "relative",
+        display: "inline-block",
+        cursor: onClick ? "pointer" : "default",
+      }}
       onClick={onClick}
       {...props}
     >
