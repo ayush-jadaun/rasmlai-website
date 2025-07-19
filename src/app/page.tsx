@@ -1,6 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import Footer from "../components/footer";
 import CalltoAction from "../components/call-to-action";
@@ -8,7 +9,7 @@ import HowitWorks from "../components/how-it-works";
 import Magnet from "@/components/ui/magneticButton";
 import PhoneSlider from "@/components/iphone";
 import RasmlaiShowcase from "@/components/emotional";
-import { useRouter } from "next/navigation";
+
 const imageUrls = [
   "/images/onboarding1.png",
   "/images/onboarding2.png",
@@ -39,26 +40,24 @@ const RasmlaiLanding = () => {
 
   // Text animation variants
   const titleVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        staggerChildren: 0.2,
+        duration: 0.6,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const letterVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       transition: {
-        duration: 0.6,
-        // Remove the ease property entirely to use default easing
+        duration: 0.5,
       },
     },
   };
@@ -66,84 +65,29 @@ const RasmlaiLanding = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden"
+      className="relative min-h-screen bg-gradient-to-br from-red-50 to-pink-50 overflow-x-hidden"
       style={{
         fontFamily:
           "'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
       }}
     >
-      {/* Brand Header */}
-      <motion.div
-        className="relative z-50 text-center pt-8"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.1 }}
-      >
-        <motion.h1
-          className="text-2xl md:text-8xl lg:text-6xl font-black tracking-wider"
-          style={{
-            fontFamily: "'Poppins', sans-serif",
-            fontWeight: 900,
-          }}
-          animate={{
-            textShadow: [
-              "0 0 20px rgba(239, 68, 68, 0.3)",
-              "0 0 40px rgba(239, 68, 68, 0.5)",
-              "0 0 20px rgba(239, 68, 68, 0.3)",
-            ],
-          }}
-          transition={{
-            textShadow: {
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-        >
-          <motion.span
-            className="bg-gradient-to-r from-red-600 via-pink-600 to-red-600 bg-clip-text text-transparent inline-block"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{
-              backgroundPosition: {
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-            style={{
-              backgroundSize: "100% 100",
-            }}
-          >
-            RASMLAI
-          </motion.span>
-        </motion.h1>
-        <motion.div
-          className="w-32 h-1 bg-gradient-to-r from-red-500 to-pink-500 mx-auto mt-2"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        />
-      </motion.div>
-
       {/* Animated Background Elements */}
       <motion.div
         style={{ y: backgroundY }}
         className="absolute inset-0 pointer-events-none"
       >
-        <div className="absolute top-20 left-10 w-32 h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>
-        <div className="absolute top-40 right-20 w-48 h-48 bg-pink-200 rounded-full opacity-15 blur-2xl"></div>
-        <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-purple-200 rounded-full opacity-25 blur-lg"></div>
+        <div className="absolute top-20 left-5 sm:left-10 w-20 sm:w-32 h-20 sm:h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>
+        <div className="absolute top-32 sm:top-40 right-10 sm:right-20 w-32 sm:w-48 h-32 sm:h-48 bg-pink-200 rounded-full opacity-15 blur-2xl"></div>
+        <div className="absolute bottom-20 sm:bottom-40 left-1/4 w-16 sm:w-24 h-16 sm:h-24 bg-purple-200 rounded-full opacity-25 blur-lg"></div>
       </motion.div>
 
       {/* Floating Organic Shapes */}
       <motion.div
         style={{ y: blobY }}
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none hidden sm:block"
       >
         <svg
-          className="absolute top-1/4 left-1/3 w-64 h-64 opacity-10"
+          className="absolute top-1/4 left-1/3 w-48 sm:w-64 h-48 sm:h-64 opacity-10"
           viewBox="0 0 200 200"
         >
           <motion.path
@@ -165,200 +109,131 @@ const RasmlaiLanding = () => {
           />
         </svg>
       </motion.div>
-      <section className="relative md:min-h-screen flex px-4">
-        <div className="max-w-7xl mx-auto flex md:items-center md:justify-center gap-x-50">
-          {/* Hero Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-center lg:text-left"
-          >
-            <motion.div
-              variants={titleVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h1
-                className="text-4xl lg:text-6xl font-black mb-4 leading-tight"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  fontWeight: 900,
-                }}
-              >
-                <motion.span
-                  className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent inline-block"
-                  variants={letterVariants}
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    backgroundPosition: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                  }}
-                >
-                  Let Your Emotions
-                </motion.span>
-                <br />
-                <motion.span
-                  className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent inline-block"
-                  variants={letterVariants}
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                  }}
-                  transition={{
-                    backgroundPosition: {
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                  }}
-                >
-                  Flow Freely
-                </motion.span>
-              </motion.h1>
 
-              <motion.h2
-                className="text-2xl lg:text-3xl font-bold mb-6 text-red-500"
-                style={{
-                  fontFamily: "'Poppins', sans-serif",
-                  fontWeight: 700,
-                }}
-                variants={letterVariants}
-                whileHover={{
-                  scale: 1.05,
-                  textShadow: "0 0 20px rgba(239, 68, 68, 0.5)",
-                }}
-              >
-                Self Reflection Is The Key
-              </motion.h2>
-            </motion.div>
+      {/* Main Hero Section */}
+      <main className="relative z-10 flex flex-col min-h-screen">
+        {/* Header - Now part of the main layout flow */}
+        <header className="px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-red-600">
+            RASMLAI
+          </h1>
+        </header>
 
-            <motion.p
-              className="text-xl text-gray-700 mb-8 max-w-2xl leading-relaxed"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <motion.span
-                className="inline-block"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
+        {/* Hero Content - Centered */}
+        <div className="flex-grow flex items-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full py-4 sm:py-16">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              {/* Text Content Column */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-center lg:text-left space-y-5 sm:space-y-6"
               >
-                A safe space where you can express anger, sadness, and every
-                emotion in between. Your AI companion is here to listen,
-                understand, and help you process whatever you&apos;re feeling.
-              </motion.span>
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.0 }}
-              className="flex justify-center md:justify-start"
-            >
-              <Magnet
-                onClick={() => router.push("/waitlist")}
-                padding={120}
-                magnetStrength={3}
-                wrapperClassName="inline-block"
-                
-              >
-                <motion.button
-                  className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0 20px 40px rgba(229, 62, 62, 0.3)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  animate={{
-                    boxShadow: [
-                      "0 0 20px rgba(229, 62, 62, 0.3)",
-                      "0 0 40px rgba(229, 62, 62, 0.5)",
-                      "0 0 20px rgba(229, 62, 62, 0.3)",
-                    ],
-                  }}
-                  transition={{
-                    boxShadow: {
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    },
-                  }}
+                <motion.div
+                  variants={titleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="space-y-3"
                 >
-                  <motion.span
-                    className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0"
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  <motion.span
-                    className="relative z-10 "
-                    animate={{
-                      scale: [1, 1.02, 1],
+                  <motion.h1
+                    className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight"
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 900,
                     }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    
+                    variants={letterVariants}
                   >
-                    Start Your Journey
-                  </motion.span>
-                </motion.button>
-              </Magnet>
-            </motion.div>
+                    <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                      Let Your Emotions Flow Freely
+                    </span>
+                  </motion.h1>
 
-            {/* Animated subtitle */}
-            <motion.p
-              className="text-sm text-gray-500 mt-4 italic"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-            >
-              <motion.span
-              className=""
-                animate={{
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                  <motion.h2
+                    className="text-xl sm:text-2xl font-bold text-red-500"
+                    style={{
+                      fontFamily: "'Poppins', sans-serif",
+                      fontWeight: 600,
+                    }}
+                    variants={letterVariants}
+                  >
+                    Self Reflection Is The Key
+                  </motion.h2>
+                </motion.div>
+
+                <motion.p
+                  className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto lg:mx-0"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  A safe space to express every emotion. Your AI companion
+                  listens, understands, and helps you process your feelings.
+                </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="flex justify-center lg:justify-start pt-2"
+                >
+                  <Magnet
+                    onClick={() => router.push("/waitlist")}
+                    padding={80}
+                    magnetStrength={2}
+                    wrapperClassName="inline-block"
+                  >
+                    <motion.button
+                      className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+                      style={{ fontFamily: "'Poppins', sans-serif" }}
+                      whileHover={{
+                        scale: 1.02,
+                        boxShadow: "0 15px 30px rgba(229, 62, 62, 0.3)",
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <motion.span
+                        className="absolute inset-0 bg-gradient-to-r from-red-500 to-pink-500 opacity-0"
+                        whileHover={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="relative z-10">Start Your Journey</span>
+                    </motion.button>
+                  </Magnet>
+                </motion.div>
+
+                <motion.p
+                  className="text-sm text-gray-500 italic pt-2"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                >
+                  Your emotions matter. Your voice matters with{" "}
+                  <span className="font-semibold text-red-500">RASMLAI</span>
+                </motion.p>
+              </motion.div>
+
+              {/* Phone Slider Column - Now visible on mobile */}
+              <motion.div
+                className="flex justify-center mt-8 lg:mt-0"
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-
-                Your emotions matter,Your Voice matters with <span className="font-bold  text-red-400 underline">RASMLAI</span>
-              </motion.span>
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className="hidden md:block"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <PhoneSlider images={imageUrls} slideSpeed={4000} />
-          </motion.div>
+                <div className="transform scale-90 sm:scale-100">
+                  <PhoneSlider images={imageUrls} slideSpeed={4000} />
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </section>
+      </main>
+
       <RasmlaiShowcase />
-
-      {/* How It Works Section */}
       <HowitWorks />
-
-      {/* Final CTA Section */}
       <CalltoAction openWaitlist={() => setIsWaitlistOpen(true)} />
-
-      {/* Footer */}
       <Footer />
     </div>
   );
