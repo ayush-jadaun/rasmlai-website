@@ -62,10 +62,10 @@ async function sendWaitlistEmail({
     const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>', // Use your verified domain
+      from: "Rasmlai <support@rasmlai.life>>", // Use your verified domain
       to: [email],
       subject: `Welcome to Rasmlai! You're #${queueNumber} in line 🌟`,
-      html: WaitlistEmail({ name:name, queueNumber:queueNumber }),
+      html: WaitlistEmail({ name: name, queueNumber: queueNumber }),
       text: `
         Welcome to Rasmlai, ${name}!
         
@@ -89,12 +89,12 @@ async function sendWaitlistEmail({
         Questions? Just reply to this email - we'd love to hear from you!
       `,
       headers: {
-        'X-Entity-Ref-ID': `waitlist-${Date.now()}`,
+        "X-Entity-Ref-ID": `waitlist-${Date.now()}`,
       },
       tags: [
         {
-          name: 'category',
-          value: 'waitlist_confirmation',
+          name: "category",
+          value: "waitlist_confirmation",
         },
       ],
     });
