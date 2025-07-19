@@ -3,6 +3,7 @@ import connectDB from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
 import { Resend } from "resend";
 import WaitlistEmail from "@/components/email";
+
 interface ValidationError {
   message: string;
 }
@@ -13,53 +14,18 @@ interface MongoError extends Error {
   errors?: Record<string, ValidationError>;
 }
 
-// POST - Add to waitlist
-export async function POST(request: NextRequest) {
-  try {
-    await connectDB();
-
-    const { name, email } = await request.json();
-
-    // Validation
-    if (!name || !email) {
-      return NextResponse.json(
-        { error: "Name and email are required" },
-        { status: 400 }
-      );
-    }
-
-    // Check if email already exists
-    const existingUser = await Waitlist.findOne({ email: email.toLowerCase() });
-
-    if (existingUser) {
-      return NextResponse.json(
-        { error: "Email already exists" },
-        { status: 409 }
-      );
-    }
-
-    // Create new waitlist entry
-    const waitlistEntry = new Waitlist({
-      name: name.trim(),
-      email: email.toLowerCase().trim(),
-    });
-
-    await waitlistEntry.save();
-
-    // Send confirmation email
-
-
 interface WaitlistEmailParams {
   email: string;
   name: string;
   queueNumber: number;
 }
-async function sendWaitlistEmail({ 
-  email, 
-  name, 
-  queueNumber, 
-}: WaitlistEmailParams ) {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function sendWaitlistEmail({
+  email,
+  name,
+  queueNumber,
+}: WaitlistEmailParams) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { data, error } = await resend.emails.send({
       from: "Rasmlai <support@rasmlai.life>", // Use your verified domain
@@ -100,47 +66,105 @@ async function sendWaitlistEmail({
     });
 
     if (error) {
-      console.error('Error sending email:', error);
-      return { success: false, error: typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error) };
+      console.error("Error sending email:", error);
+      return {
+        success: false,
+        error:
+          typeof error === "object" && error !== null && "message" in error
+            ? (error as { message: string }).message
+            : String(error),
+      };
     }
 
-    console.log('Email sent successfully:', data);
+    console.log("Email sent successfully:", data);
     return { success: true, data };
   } catch (error) {
-    console.error('Error sending email:', error);
-    return { success: false, error: typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error) };
+    console.error("Error sending email:", error);
+    return {
+      success: false,
+      error:
+        typeof error === "object" && error !== null && "message" in error
+          ? (error as { message: string }).message
+          : String(error),
+    };
   }
 }
 
-        //get queue position
-        const queueNumber = await Waitlist.countDocuments();
+// POST - Add to waitlist
+export async function POST(request: NextRequest) {
+  try {
+    await connectDB();
 
-        // Send confirmation email
-        const emailResult = await sendWaitlistEmail({
+    const { name, email } = await request.json();
+
+    // Validation
+    if (!name || !email) {
+      return NextResponse.json(
+        { error: "Name and email are required" },
+        { status: 400 }
+      );
+    }
+
+    // Check if email already exists
+    const existingUser = await Waitlist.findOne({ email: email.toLowerCase() });
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "Email already exists" },
+        { status: 409 }
+      );
+    }
+
+    // Create new waitlist entry
+    const waitlistEntry = new Waitlist({
+      name: name.trim(),
       email: email.toLowerCase().trim(),
-            name:name.trim(),
-            queueNumber,
-        });
+    });
 
-        if (emailResult.success) {
-           return NextResponse.json(
-      {
-        message: "Successfully added to waitlist",
-        data: {
-          name: waitlistEntry.name,
-          email: waitlistEntry.email,
-          joinedAt: waitlistEntry.joinedAt,
+    await waitlistEntry.save();
+
+    // Get queue position
+    const queueNumber = await Waitlist.countDocuments();
+
+    // Send confirmation email
+    const emailResult = await sendWaitlistEmail({
+      email: email.toLowerCase().trim(),
+      name: name.trim(),
+      queueNumber,
+    });
+
+    if (emailResult.success) {
+      // Update the notified field to true after successful email send
+      await Waitlist.findByIdAndUpdate(waitlistEntry._id, { notified: true });
+
+      return NextResponse.json(
+        {
+          message: "Successfully added to waitlist",
+          data: {
+            name: waitlistEntry.name,
+            email: waitlistEntry.email,
+            joinedAt: waitlistEntry.joinedAt,
+            notified: true,
+          },
         },
-      },
-      { status: 201 }
-    );
-        } else {
-            return NextResponse.json({
-                success: false,
-                message: 'Added to waitlist but failed to send email',
-            }, { status: 500 });
-        }
-
+        { status: 201 }
+      );
+    } else {
+      // Email failed, so notified remains false
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Added to waitlist but failed to send email",
+          data: {
+            name: waitlistEntry.name,
+            email: waitlistEntry.email,
+            joinedAt: waitlistEntry.joinedAt,
+            notified: false,
+          },
+        },
+        { status: 500 }
+      );
+    }
   } catch (error: unknown) {
     console.error("Waitlist API Error:", error);
 
