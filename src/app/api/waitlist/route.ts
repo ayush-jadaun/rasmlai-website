@@ -37,7 +37,7 @@ async function sendWaitlistEmail({
         
         Thank you for joining our waitlist. You're #${queueNumber} in line,to begin your emotional wellness journey.
         
-        We're building a safe space where you can express anger, sadness, and every emotion in between. Your AI companion is being carefully crafted to listen, understand, and help you process whatever you're feeling.
+        We're building a safe space where you can express anger, sadness, happiness and every emotion in between. Your AI companion is being carefully crafted to listen, understand, and help you process whatever you're feeling.
         What to expect when Rasmlai launches:
         • AI companion trained specifically for emotional support
         • 100% private and secure conversations
