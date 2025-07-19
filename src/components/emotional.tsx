@@ -42,7 +42,7 @@ const RasmlaiShowcase = ({ slideSpeed = 4000 }) => {
 
   return (
     // MODIFIED: Reduced top padding by changing `py` to `pb` to decrease space from the previous section.
-    <section className="relative py-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-20 h-20 sm:w-32 sm:h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>

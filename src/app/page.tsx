@@ -86,7 +86,7 @@ const RasmlaiLanding = () => {
       </header>
 
       {/* Main Hero Section */}
-      <main className="relative z-10 pt-20 sm:pt-24 lg:pt-28">
+      <main className="relative z-10 pt-25 sm:pt-24 lg:pt-28">
         {/* Hero Content */}
         <div className="px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
           <div className="max-w-7xl mx-auto">
