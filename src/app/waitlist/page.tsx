@@ -75,8 +75,20 @@ const WaitlistForm: React.FC = () => {
         <div className="absolute top-20 left-10 w-32 h-32 bg-red-200 rounded-full opacity-10 blur-xl"></div>
         <div className="absolute bottom-40 right-20 w-48 h-48 bg-pink-200 rounded-full opacity-10 blur-2xl"></div>
       </div>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-50/80 to-pink-50/80 backdrop-blur-sm border-b border-red-100/50">
+              <div className="px-4 py-2 sm:px-6 lg:px-8">
+                <motion.h1
+                  className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  RASMLAI
+                </motion.h1>
+              </div>
+            </header>
 
-      <div className="relative z-10 flex-1 flex flex-col">
+      <div className="relative z-10 flex-1 flex flex-col py-10">
         {/* Header Section - Top Center */}
         <div className="text-center pt-8 pb-4">
           <motion.h1
