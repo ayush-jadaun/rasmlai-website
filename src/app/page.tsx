@@ -203,17 +203,27 @@ const RasmlaiLanding = () => {
                   </Magnet>
                 </motion.div>
 
-                <motion.p
-                  className="text-sm text-gray-500 italic pt-2"
-                  style={{ fontFamily: "'Inter', sans-serif" }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                >
-                  Your emotions matter. Your voice matters with{" "}
-                  <span className="font-semibold text-red-500">RASMLAI</span>
-                </motion.p>
-              </motion.div>
+            {/* Animated subtitle */}
+            <motion.p
+              className="text-sm text-gray-500 mt-4 italic"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+
+              <motion.p
+                className=""
+              >
+                Your emotions matter,Your Voice matters with <br />
+                <p className="font-bold text-6xl mt-5 text-red-400">
+                  RASMLAI
+                </p>
+              </motion.p>
+
+              
+            </motion.p>
+          </motion.div>
 
               {/* Phone Slider Column - Now visible on mobile */}
               <motion.div

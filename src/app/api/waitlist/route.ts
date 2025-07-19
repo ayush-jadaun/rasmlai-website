@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import Waitlist from "@/models/Waitlist";
-
+import { Resend } from "resend";
+import WaitlistEmail from "@/components/email";
 interface ValidationError {
   message: string;
 }
@@ -45,7 +46,84 @@ export async function POST(request: NextRequest) {
 
     await waitlistEntry.save();
 
-    return NextResponse.json(
+    // Send confirmation email
+
+
+interface WaitlistEmailParams {
+  email: string;
+  name: string;
+  queueNumber: number;
+}
+async function sendWaitlistEmail({ 
+  email, 
+  name, 
+  queueNumber, 
+}: WaitlistEmailParams ) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+  try {
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>', // Use your verified domain
+      to: [email],
+      subject: `Welcome to Rasmlai! You're #${queueNumber} in line 🌟`,
+      html: WaitlistEmail({ name:name, queueNumber:queueNumber }),
+      text: `
+        Welcome to Rasmlai, ${name}!
+        
+        Thank you for joining our waitlist. You're #${queueNumber} in line,to begin your emotional wellness journey.
+        
+        We're building a safe space where you can express anger, sadness, and every emotion in between. Your AI companion is being carefully crafted to listen, understand, and help you process whatever you're feeling.
+        What to expect when Rasmlai launches:
+        • AI companion trained specifically for emotional support
+        • 100% private and secure conversations
+        • Guided self-reflection exercises
+        • Beautiful, intuitive mobile experience
+        • Personalized emotional growth tracking
+        
+        We'll keep you updated on our progress and notify you as soon as we're ready to launch!
+        
+        Your emotions matter, Your voice matters with RASMLAI.
+        
+        Best regards,
+        The Rasmlai Team
+        
+        Questions? Just reply to this email - we'd love to hear from you!
+      `,
+      headers: {
+        'X-Entity-Ref-ID': `waitlist-${Date.now()}`,
+      },
+      tags: [
+        {
+          name: 'category',
+          value: 'waitlist_confirmation',
+        },
+      ],
+    });
+
+    if (error) {
+      console.error('Error sending email:', error);
+      return { success: false, error: typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error) };
+    }
+
+    console.log('Email sent successfully:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return { success: false, error: typeof error === "object" && error !== null && "message" in error ? (error as { message: string }).message : String(error) };
+  }
+}
+
+        //get queue position
+        const queueNumber = await Waitlist.countDocuments();
+
+        // Send confirmation email
+        const emailResult = await sendWaitlistEmail({
+      email: email.toLowerCase().trim(),
+            name:name.trim(),
+            queueNumber,
+        });
+
+        if (emailResult.success) {
+           return NextResponse.json(
       {
         message: "Successfully added to waitlist",
         data: {
@@ -56,6 +134,13 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
+        } else {
+            return NextResponse.json({
+                success: false,
+                message: 'Added to waitlist but failed to send email',
+            }, { status: 500 });
+        }
+
   } catch (error: unknown) {
     console.error("Waitlist API Error:", error);
 
