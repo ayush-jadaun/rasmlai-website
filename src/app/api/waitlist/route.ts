@@ -62,7 +62,7 @@ async function sendWaitlistEmail({
     const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const { data, error } = await resend.emails.send({
-      from: "Rasmlai <support@rasmlai.life>>", // Use your verified domain
+      from: "Rasmlai <support@rasmlai.life>", // Use your verified domain
       to: [email],
       subject: `Welcome to Rasmlai! You're #${queueNumber} in line 🌟`,
       html: WaitlistEmail({ name: name, queueNumber: queueNumber }),
