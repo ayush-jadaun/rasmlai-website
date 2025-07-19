@@ -71,7 +71,21 @@ const RasmlaiLanding = () => {
           "'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
       }}
     >
-      {/* Animated Background Elements */}
+      {/* Fixed Header with RASMLAI branding */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-red-50/80 to-pink-50/80 backdrop-blur-sm border-b border-red-100/50">
+        <div className="px-4 py-2 sm:px-6 lg:px-8">
+          <motion.h1
+            className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            RASMLAI
+          </motion.h1>
+        </div>
+      </header>
+
+      {/* Animated Background Elements
       <motion.div
         style={{ y: backgroundY }}
         className="absolute inset-0 pointer-events-none"
@@ -79,10 +93,10 @@ const RasmlaiLanding = () => {
         <div className="absolute top-20 left-5 sm:left-10 w-20 sm:w-32 h-20 sm:h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>
         <div className="absolute top-32 sm:top-40 right-10 sm:right-20 w-32 sm:w-48 h-32 sm:h-48 bg-pink-200 rounded-full opacity-15 blur-2xl"></div>
         <div className="absolute bottom-20 sm:bottom-40 left-1/4 w-16 sm:w-24 h-16 sm:h-24 bg-purple-200 rounded-full opacity-25 blur-lg"></div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Floating Organic Shapes */}
-      <motion.div
+      {/* <motion.div
         style={{ y: blobY }}
         className="absolute inset-0 pointer-events-none hidden sm:block"
       >
@@ -108,36 +122,29 @@ const RasmlaiLanding = () => {
             }}
           />
         </svg>
-      </motion.div>
+      </motion.div> */}
 
       {/* Main Hero Section */}
-      <main className="relative z-10 flex flex-col min-h-screen">
-        {/* Header - Now part of the main layout flow */}
-        <header className="px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-red-600">
-            RASMLAI
-          </h1>
-        </header>
-
-        {/* Hero Content - Centered */}
-        <div className="flex-grow flex items-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto w-full py-4 sm:py-16">
+      <main className="relative z-10 pt-12 sm:pt-14">
+        {/* Hero Content - Centered with better mobile spacing */}
+        <div className="flex items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-3.5rem)] px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full -py-8 sm:py-16">
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Text Content Column */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-center lg:text-left space-y-5 sm:space-y-6"
+                className="text-center lg:text-left space-y-4 sm:space-y-6"
               >
                 <motion.div
                   variants={titleVariants}
                   initial="hidden"
                   animate="visible"
-                  className="space-y-3"
+                  className="space-y-2 sm:space-y-3"
                 >
                   <motion.h1
-                    className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight"
+                    className="text-3xl sm:text-4xl lg:text-6xl font-black leading-tight"
                     style={{
                       fontFamily: "'Poppins', sans-serif",
                       fontWeight: 900,
@@ -150,7 +157,7 @@ const RasmlaiLanding = () => {
                   </motion.h1>
 
                   <motion.h2
-                    className="text-xl sm:text-2xl font-bold text-red-500"
+                    className="text-lg sm:text-xl lg:text-2xl font-bold text-red-500"
                     style={{
                       fontFamily: "'Poppins', sans-serif",
                       fontWeight: 600,
@@ -162,7 +169,7 @@ const RasmlaiLanding = () => {
                 </motion.div>
 
                 <motion.p
-                  className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto lg:mx-0"
+                  className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto lg:mx-0 px-2 sm:px-0"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -185,7 +192,7 @@ const RasmlaiLanding = () => {
                     wrapperClassName="inline-block"
                   >
                     <motion.button
-                      className="bg-red-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
+                      className="bg-red-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow duration-300 relative overflow-hidden"
                       style={{ fontFamily: "'Poppins', sans-serif" }}
                       whileHover={{
                         scale: 1.02,
@@ -203,36 +210,29 @@ const RasmlaiLanding = () => {
                   </Magnet>
                 </motion.div>
 
-            {/* Animated subtitle */}
-            <motion.p
-              className="text-sm text-gray-500 mt-4 italic"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-            >
+                {/* Animated subtitle - Better mobile formatting */}
+                <motion.div
+                  className="text-center lg:text-left mt-4 sm:mt-6"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                >
+                  <p className="text-xs sm:text-sm text-gray-500 italic leading-relaxed">
+                    Your emotions matter, Your Voice matters with Rasmlai
+                  </p>
+                 
+                </motion.div>
+              </motion.div>
 
-              <motion.p
-                className=""
-              >
-                Your emotions matter,Your Voice matters with <br />
-                <p className="font-bold text-6xl mt-5 text-red-400">
-                  RASMLAI
-                </p>
-              </motion.p>
-
-              
-            </motion.p>
-          </motion.div>
-
-              {/* Phone Slider Column - Now visible on mobile */}
+              {/* Phone Slider Column - Hidden on mobile */}
               <motion.div
-                className="flex justify-center mt-8 lg:mt-0"
+                className="hidden lg:flex justify-center mt-6 sm:mt-8 lg:mt-0"
                 initial={{ opacity: 0, scale: 0.9, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <div className="transform scale-90 sm:scale-100">
+                <div className="transform scale-100">
                   <PhoneSlider images={imageUrls} slideSpeed={4000} />
                 </div>
               </motion.div>
