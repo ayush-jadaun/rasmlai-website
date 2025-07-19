@@ -85,27 +85,27 @@ const RasmlaiLanding = () => {
         </div>
       </header>
 
-      {/* Main Hero Section - Reduced padding for better spacing */}
-      <main className="relative z-10 pt-16 sm:pt-18 lg:pt-20">
-        {/* Hero Content - Optimized spacing for all screen sizes */}
+      {/* Main Hero Section */}
+      <main className="relative z-10 pt-20 sm:pt-24 lg:pt-28">
+        {/* Hero Content */}
         <div className="px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 xl:gap-16 items-center">
-              {/* Text Content Column - Optimized for all screens */}
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+              {/* Text Content Column */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="text-center lg:text-left space-y-4 sm:space-y-12"
+                className="text-center lg:text-left space-y-6 sm:space-y-8"
               >
                 <motion.div
                   variants={titleVariants}
                   initial="hidden"
                   animate="visible"
-                  className="space-y-2 sm:space-y-3"
+                  className="space-y-3 sm:space-y-4"
                 >
                   <motion.h1
-                    className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-tight"
+                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight"
                     style={{
                       fontFamily: "'Poppins', sans-serif",
                       fontWeight: 900,
@@ -118,7 +118,7 @@ const RasmlaiLanding = () => {
                   </motion.h1>
 
                   <motion.h2
-                    className="text-base sm:text-lg lg:text-xl font-semibold text-red-500"
+                    className="text-lg sm:text-xl lg:text-2xl font-semibold text-red-500"
                     style={{
                       fontFamily: "'Poppins', sans-serif",
                       fontWeight: 600,
@@ -130,7 +130,7 @@ const RasmlaiLanding = () => {
                 </motion.div>
 
                 <motion.p
-                  className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0"
+                  className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg mx-auto lg:mx-0"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -154,7 +154,7 @@ const RasmlaiLanding = () => {
                     wrapperClassName="inline-block"
                   >
                     <motion.button
-                      className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                      className="bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 sm:px-10 sm:py-5 rounded-full text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
                       style={{ fontFamily: "'Poppins', sans-serif" }}
                       whileHover={{
                         scale: 1.02,
@@ -183,26 +183,26 @@ const RasmlaiLanding = () => {
 
                 {/* Minimal tagline */}
                 <motion.div
-                  className="text-center lg:text-left"
+                  className="text-center lg:text-left pt-4"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
                 >
-                  <p className="text-xs sm:text-sm text-gray-400 italic">
+                  <p className="text-sm sm:text-base text-gray-400 italic">
                     Your emotions matter, Your Voice matters with Rasmlai
                   </p>
                 </motion.div>
               </motion.div>
 
-              {/* Phone Slider Column - Only show on larger screens */}
+              {/* Phone Slider Column */}
               <motion.div
-                className="hidden lg:flex justify-center items-center"
+                className="flex justify-center items-center"
                 initial={{ opacity: 0, scale: 0.95, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <div className="transform scale-90 xl:scale-100">
+                <div className="hidden md:flex transform scale-75 sm:scale-90 lg:scale-100">
                   <PhoneSlider images={imageUrls} slideSpeed={4000} />
                 </div>
               </motion.div>

@@ -4,7 +4,7 @@ import { Phone, Heart, MessageCircle, Volume2 } from "lucide-react";
 import Image from "next/image";
 import PhoneSlider from "./iphone";
 
-const RasmlaiShowcase = ( {slideSpeed = 4000} ) => {
+const RasmlaiShowcase = ({ slideSpeed = 4000 }) => {
   const images = [
     "/images/onboarding1.png",
     "/images/onboarding2.png",
@@ -41,7 +41,8 @@ const RasmlaiShowcase = ( {slideSpeed = 4000} ) => {
   ];
 
   return (
-    <section className="relative py-1 sm:py-16 lg:py-2 bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden">
+    // MODIFIED: Reduced top padding by changing `py` to `pb` to decrease space from the previous section.
+    <section className="relative py-12 sm:pb-16 lg:pb-20 bg-gradient-to-br from-red-50 to-pink-50 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-20 h-20 sm:w-32 sm:h-32 bg-red-200 rounded-full opacity-20 blur-xl"></div>
@@ -99,7 +100,7 @@ const RasmlaiShowcase = ( {slideSpeed = 4000} ) => {
 
             {/* Features Grid */}
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 pt-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0 }}
