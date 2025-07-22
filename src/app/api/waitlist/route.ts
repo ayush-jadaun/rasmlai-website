@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
     await waitlistEntry.save();
 
     // Get queue position
-    const queueNumber = await Waitlist.countDocuments();
+    const queueNumber = await Waitlist.countDocuments()+200;
 
     // Send confirmation email
     const emailResult = await sendWaitlistEmail({
